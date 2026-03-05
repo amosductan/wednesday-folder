@@ -1,0 +1,251 @@
+"""
+Build complete events.json from all extracted PDF data + email subjects.
+Run after backfill to populate the full historical dataset.
+"""
+import json
+import os
+from pathlib import Path
+
+SCRIPT_DIR = Path(__file__).parent.resolve()
+DATA_DIR = SCRIPT_DIR / "data"
+
+# Historical events curated from all 18 Wednesday Folder PDFs.
+# Each week's events are extracted from the PDF text content.
+
+ALL_WEEKS = [
+    {
+        "folder_date": "2026-03-04",
+        "pdf_file": "2026-03-04_wednesday_folder.pdf",
+        "summary": "Chipotle fundraiser tonight, ASP registration closing Sunday Mar 8, Ice Skating Night Mar 13, PTA meeting Mar 11, Career Week Mar 17-20, Read Across America dress-up week (Mar 2-6).",
+        "events": [
+            {"title": "Chipotle Fundraiser Night", "date": "2026-03-04", "date_display": "Tuesday, March 4", "category": "fundraiser", "details": "Dine at Chipotle tonight - portion of sales goes to PTA.", "links": []},
+            {"title": "Read Across America Dress-Up Week", "date_start": "2026-03-02", "date_end": "2026-03-06", "date_display": "March 2-6", "category": "school-spirit", "details": "Mon: Dress as favorite book character. Tue: Bring a stuffie to read with. Wed: Jaguar Day - school gear/colors/animal print. Thu: PJ Day. Fri: Dress as favorite animal or athlete.", "links": []},
+            {"title": "After School Program (ASP) Registration Deadline", "date": "2026-03-08", "date_display": "Sunday, March 8", "category": "deadline", "details": "Spring ASP registration closes. Classes: Magic of Mindfulness, World Cup Warmup, Arts & Crafts, Lego Club, Beyblade Battle, Junk Journaling, Adventure Camp, Yoga, Word Wizards.", "links": [{"label": "Register for ASP", "url": "https://bit.ly/aspstcloud"}, {"label": "Homeroom.com", "url": "https://homeroom.com"}]},
+            {"title": "PTA General Meeting", "date": "2026-03-11", "date_display": "Wednesday, March 11", "category": "meeting", "details": "8:00-9:00 PM ET via Zoom. Special guests: Liberty & Roosevelt principals discussing middle school transitions.", "links": []},
+            {"title": "Family Ice Skating Night", "date": "2026-03-13", "date_display": "Friday, March 13", "category": "community-event", "details": "$5 per person at Codey Arena, 560 Northfield Avenue, 6:30-8:00 PM. Free skate rentals for PTA members. Volunteers needed.", "links": [{"label": "Register / Volunteer", "url": "https://bit.ly/stcloudskate26"}]},
+            {"title": "Career Week", "date_start": "2026-03-17", "date_end": "2026-03-20", "date_display": "March 17-20", "category": "school-event", "details": "Sign up to participate or volunteer for Career Week.", "links": [{"label": "Sign Up", "url": "https://tinyurl.com/StCloudCareerWeek"}]},
+            {"title": "Family STEM Festival - Volunteers Needed", "date": None, "date_display": "Spring 2026 (TBD)", "category": "volunteer", "details": "Grant-funded event. Need volunteers for logistics, outreach, hands-on STEM activities. Contact grants@stcloudpta.org", "links": []},
+            {"title": "Diversity Council - Heritage Month Contributions", "date": None, "date_display": "Ongoing", "category": "volunteer", "details": "Seeking families with info to share for Women's History Month, Black History Month, Lunar New Year. Contact diversitycouncilstc@gmail.com", "links": []},
+            {"title": "PTA Matching Gifts via Benevity", "date": None, "date_display": "Ongoing", "category": "fundraiser", "details": "PTA accepts matching gifts through Benevity. PTA TIN: 51-0224833", "links": []},
+            {"title": "PTA Membership", "date": None, "date_display": "2025-26 School Year", "category": "membership", "details": "$15 membership. Email membership@stcloudpta.org", "links": [{"label": "Join the PTA", "url": "https://bit.ly/scpta2526"}]}
+        ]
+    },
+    {
+        "folder_date": "2026-02-25",
+        "pdf_file": "2026-02-25_wednesday_folder.pdf",
+        "summary": "ASP registration starts tomorrow (Feb 26), Read Across America Week coming Mar 2-6, Chipotle fundraiser Mar 4, Ice Skating Night Mar 13, Career Week Mar 17-20.",
+        "events": [
+            {"title": "ASP Spring Registration Opens", "date": "2026-02-26", "date_display": "Thursday, February 26", "category": "deadline", "details": "After School Program spring registration begins. Register at bit.ly/aspstcloud.", "links": [{"label": "Register for ASP", "url": "https://bit.ly/aspstcloud"}]},
+            {"title": "Read Across America Week", "date_start": "2026-03-02", "date_end": "2026-03-06", "date_display": "March 2-6", "category": "school-spirit", "details": "Dress-up week celebrating reading.", "links": []},
+            {"title": "Chipotle Fundraiser Night", "date": "2026-03-04", "date_display": "Tuesday, March 4", "category": "fundraiser", "details": "Dine at Chipotle - portion of sales goes to PTA.", "links": []},
+            {"title": "Family Ice Skating Night", "date": "2026-03-13", "date_display": "Friday, March 13", "category": "community-event", "details": "$5 per person at Codey Arena, 6:30-8:00 PM.", "links": [{"label": "Register", "url": "https://bit.ly/stcloudskate26"}]},
+            {"title": "Career Week", "date_start": "2026-03-17", "date_end": "2026-03-20", "date_display": "March 17-20", "category": "school-event", "details": "Sign up to participate or volunteer.", "links": [{"label": "Sign Up", "url": "https://tinyurl.com/StCloudCareerWeek"}]}
+        ]
+    },
+    {
+        "folder_date": "2026-02-18",
+        "pdf_file": "2026-02-18_wednesday_folder.pdf",
+        "summary": "Black History Celebration tomorrow (Feb 19), ASP registration coming Feb 26, Ice Skating Night Mar 13, STEM Festival volunteers needed.",
+        "events": [
+            {"title": "Black History Family Celebration Night", "date": "2026-02-19", "date_display": "Thursday, February 19", "category": "school-event", "details": "School-wide celebration at 6:00 PM.", "links": []},
+            {"title": "ASP Spring Registration Coming", "date": "2026-02-26", "date_display": "February 26", "category": "deadline", "details": "After School Program spring registration opens next week.", "links": []},
+            {"title": "Family Ice Skating Night", "date": "2026-03-13", "date_display": "Friday, March 13", "category": "community-event", "details": "Codey Arena, 6:30-8:00 PM.", "links": [{"label": "Register", "url": "https://bit.ly/stcloudskate26"}]},
+            {"title": "STEM Festival Volunteers Needed", "date": None, "date_display": "Spring 2026", "category": "volunteer", "details": "Volunteers needed for planning and execution. Contact grants@stcloudpta.org", "links": []}
+        ]
+    },
+    {
+        "folder_date": "2026-02-11",
+        "pdf_file": "2026-02-11_wednesday_folder.pdf",
+        "summary": "PTA Meeting tonight, Black History Celebration Feb 19, 100th Day of School celebrations, Diversity Council heritage months, STEM Festival planning.",
+        "events": [
+            {"title": "PTA General Meeting", "date": "2026-02-11", "date_display": "Wednesday, February 11", "category": "meeting", "details": "8:00-9:00 PM ET via Zoom.", "links": []},
+            {"title": "Black History Family Celebration Night", "date": "2026-02-19", "date_display": "Thursday, February 19", "category": "school-event", "details": "School-wide celebration at 6:00 PM.", "links": []},
+            {"title": "Diversity Council - Heritage Months", "date": None, "date_display": "Ongoing", "category": "volunteer", "details": "Families with info to share on Black History Month, Women's History Month, Lunar New Year - contact diversitycouncilstc@gmail.com", "links": []},
+            {"title": "STEM Festival Volunteers Needed", "date": None, "date_display": "Spring 2026", "category": "volunteer", "details": "Volunteers needed for grant-funded family STEM festival.", "links": []}
+        ]
+    },
+    {
+        "folder_date": "2026-01-28",
+        "pdf_file": "2026-01-28_wednesday_folder.pdf",
+        "summary": "Panera Night on Friday (Jan 31), Black History Celebration Feb 19, kindergarten pre-registration nights, STEM Festival volunteers, Diversity Council.",
+        "events": [
+            {"title": "Panera Fundraiser Night", "date": "2026-01-31", "date_display": "Friday, January 31", "category": "fundraiser", "details": "Dine at Panera - proceeds support PTA.", "links": []},
+            {"title": "Kindergarten Pre-Registration Nights", "date": None, "date_display": "Coming Soon", "category": "school-event", "details": "For incoming kindergarten families (Mini Mountaineers).", "links": []},
+            {"title": "Black History Family Celebration Night", "date": "2026-02-19", "date_display": "February 19, 6:00 PM", "category": "school-event", "details": "School-wide celebration.", "links": []},
+            {"title": "STEM Festival Volunteers Needed", "date": None, "date_display": "Spring 2026", "category": "volunteer", "details": "Volunteers needed. Contact grants@stcloudpta.org", "links": []}
+        ]
+    },
+    {
+        "folder_date": "2026-01-21",
+        "pdf_file": "2026-01-21_wednesday_folder.pdf",
+        "summary": "Panera fundraiser night coming, STEM Festival & Diversity Council volunteers needed, upcoming events calendar (Black History Feb 19, Career Week Mar 17-20, Ice Skating Mar 13).",
+        "events": [
+            {"title": "Panera Fundraiser Night", "date": "2026-01-31", "date_display": "Friday, January 31", "category": "fundraiser", "details": "Dine at Panera - proceeds support PTA.", "links": []},
+            {"title": "STEM Festival Volunteers Needed", "date": None, "date_display": "Spring 2026", "category": "volunteer", "details": "Volunteers needed for logistics, activities, donations. Contact grants@stcloudpta.org", "links": []},
+            {"title": "Diversity Council Volunteers", "date": None, "date_display": "Ongoing", "category": "volunteer", "details": "Heritage months support - contact diversitycouncilstc@gmail.com", "links": []}
+        ]
+    },
+    {
+        "folder_date": "2026-01-14",
+        "pdf_file": "2026-01-14_wednesday_folder.pdf",
+        "summary": "PTA Meeting tonight with special guests, Diversity Council heritage month volunteers needed, PTA membership drive.",
+        "events": [
+            {"title": "PTA General Meeting", "date": "2026-01-14", "date_display": "Wednesday, January 14", "category": "meeting", "details": "8:00-9:00 PM ET via Zoom. Meeting ID: 864 8174 0538, Password: 360157.", "links": []},
+            {"title": "Diversity Council - Heritage Months", "date": None, "date_display": "Ongoing", "category": "volunteer", "details": "Families with info on Lunar New Year, Black History Month, Women's History Month - contact diversitycouncilstc@gmail.com", "links": []}
+        ]
+    },
+    {
+        "folder_date": "2025-12-10",
+        "pdf_file": "2025-12-10_wednesday_folder.pdf",
+        "summary": "PTA Meeting tonight, Winter Drive gift wrapping help needed, STEM Festival volunteers, Diversity Survey, Holiday Bazaar was Dec 6, Book Fair this week.",
+        "events": [
+            {"title": "PTA General Meeting", "date": "2025-12-10", "date_display": "Wednesday, December 10", "category": "meeting", "details": "8:00-9:00 PM ET via Zoom.", "links": []},
+            {"title": "Winter Drive - Gift Wrapping Help", "date": None, "date_display": "This week", "category": "volunteer", "details": "Donations collected and sorted - now need volunteers to wrap gifts.", "links": []},
+            {"title": "STEM Festival Volunteers Needed", "date": None, "date_display": "Spring 2026", "category": "volunteer", "details": "Planning meetings via Zoom starting January. Contact grants@stcloudpta.org", "links": []},
+            {"title": "Diversity Survey", "date": None, "date_display": "Ongoing", "category": "community-event", "details": "Share your family's story - complete the survey to help highlight diversity at St. Cloud.", "links": []},
+            {"title": "Bubble Wrap Request (Art Class)", "date": None, "date_display": "Ongoing", "category": "school-event", "details": "Mrs. Swart's art class requesting bubble wrap donations.", "links": []}
+        ]
+    },
+    {
+        "folder_date": "2025-11-26",
+        "pdf_file": "2025-11-26_wednesday_folder.pdf",
+        "summary": "Holiday Bazaar Dec 6 needs volunteers, Book Fair Dec 2-6, Winter Drive toy/book donations, Santa visit at Bazaar 10-11 AM.",
+        "events": [
+            {"title": "Holiday Bazaar", "date": "2025-12-06", "date_display": "Saturday, December 6", "category": "community-event", "details": "10 AM - 2 PM at 71 Sheridan Ave. Visit from Santa 10-11 AM. Students can sell crafts, baked goods. Volunteers needed.", "links": []},
+            {"title": "Scholastic Book Fair", "date_start": "2025-12-02", "date_end": "2025-12-06", "date_display": "December 2-6", "category": "school-event", "details": "Set up your eWallet at scholastic.com/bf/stcloudelementaryschool3. No cash accepted.", "links": []},
+            {"title": "Winter Drive - Toy & Book Donations", "date": None, "date_display": "Through December", "category": "volunteer", "details": "Donate new toys or books to bin by main office. Can also sponsor a student or donate gift cards.", "links": []}
+        ]
+    },
+    {
+        "folder_date": "2025-11-19",
+        "pdf_file": "2025-11-19_wednesday_folder.pdf",
+        "summary": "Food Drive this week (Nov 17-21), Winter Drive donations, Holiday Bazaar Dec 6, Book Fair Dec 2-6.",
+        "events": [
+            {"title": "Food Drive", "date_start": "2025-11-17", "date_end": "2025-11-21", "date_display": "November 17-21", "category": "community-event", "details": "Collecting shelf-stable food. Send with student or bring to parent-teacher conferences.", "links": []},
+            {"title": "Winter Drive - Toy & Book Donations", "date": None, "date_display": "Through December", "category": "volunteer", "details": "Donate new toys or books to bin by main office.", "links": []},
+            {"title": "Holiday Bazaar", "date": "2025-12-06", "date_display": "Saturday, December 6", "category": "community-event", "details": "10 AM - 2 PM. Visit from Santa 10-11 AM.", "links": []},
+            {"title": "Scholastic Book Fair", "date_start": "2025-12-02", "date_end": "2025-12-06", "date_display": "December 2-6", "category": "school-event", "details": "Set up your eWallet. No cash accepted.", "links": []}
+        ]
+    },
+    {
+        "folder_date": "2025-11-12",
+        "pdf_file": "2025-11-12_wednesday_folder.pdf",
+        "summary": "PTA Meeting tonight, Holiday Bazaar Dec 6, Book Fair Dec 2-6 (volunteers needed), Pie Sale orders, Veterans Day march Friday, Food Drive Nov 17-21.",
+        "events": [
+            {"title": "PTA General Meeting", "date": "2025-11-12", "date_display": "Wednesday, November 12", "category": "meeting", "details": "8:00-9:00 PM ET via Zoom.", "links": []},
+            {"title": "Veterans Day March", "date": "2025-11-14", "date_display": "Friday, November 14", "category": "school-event", "details": "9:30 AM on Stagg Field. Entire school marches to acknowledge and celebrate veterans.", "links": []},
+            {"title": "Holiday Pie Sale", "date": None, "date_display": "Order by deadline", "category": "fundraiser", "details": "8-inch homemade pies from Splurge Bakery in Millburn. $25 per pie. Get pies in time for Thanksgiving.", "links": []},
+            {"title": "Food Drive", "date_start": "2025-11-17", "date_end": "2025-11-21", "date_display": "November 17-21", "category": "community-event", "details": "Collecting shelf-stable food.", "links": []},
+            {"title": "Scholastic Book Fair", "date_start": "2025-12-02", "date_end": "2025-12-06", "date_display": "December 2-6", "category": "school-event", "details": "Volunteers needed - sign up at bit.ly/scbf25. Set up eWallet. All Book Fund contributions support students who need help buying books.", "links": [{"label": "Volunteer Sign Up", "url": "https://bit.ly/scbf25"}]},
+            {"title": "Holiday Bazaar", "date": "2025-12-06", "date_display": "Saturday, December 6", "category": "community-event", "details": "10 AM - 2 PM. Students can sell crafts, baked goods.", "links": []}
+        ]
+    },
+    {
+        "folder_date": "2025-11-05",
+        "pdf_file": "2025-11-05_wednesday_folder.pdf",
+        "summary": "Holiday Pie Sale, PTA Meeting Nov 12, Veterans Day march Nov 14, Food Drive Nov 17-21, Holiday Bazaar vendors wanted, Picture Retake Day.",
+        "events": [
+            {"title": "Holiday Pie Sale", "date": None, "date_display": "Order now", "category": "fundraiser", "details": "$25 per 8-inch pie from Splurge Bakery in Millburn. Pies for Thanksgiving.", "links": []},
+            {"title": "Picture Retake Day", "date": None, "date_display": "Coming soon", "category": "school-event", "details": "School picture retakes.", "links": []},
+            {"title": "PTA General Meeting", "date": "2025-11-12", "date_display": "Wednesday, November 12", "category": "meeting", "details": "8:00-9:00 PM ET via Zoom.", "links": []},
+            {"title": "Veterans Day March", "date": "2025-11-14", "date_display": "Friday, November 14", "category": "school-event", "details": "9:30 AM on Stagg Field.", "links": []},
+            {"title": "Food Drive", "date_start": "2025-11-17", "date_end": "2025-11-21", "date_display": "November 17-21", "category": "community-event", "details": "Collecting shelf-stable food.", "links": []},
+            {"title": "Holiday Bazaar - Vendors Wanted", "date": "2025-12-06", "date_display": "Saturday, December 6", "category": "community-event", "details": "10 AM - 2 PM at 71 Sheridan Ave. Table cost: $35 + item donation for raffle. Visit bit.ly/schb2025", "links": [{"label": "Vendor Sign Up", "url": "https://bit.ly/schb2025"}]}
+        ]
+    },
+    {
+        "folder_date": "2025-10-29",
+        "pdf_file": "2025-10-29_wednesday_folder.pdf",
+        "summary": "Holiday Bazaar vendors wanted, Election Day Bake Sale Nov 4, PTA Meeting Nov 12, Veterans Day march Nov 14, Food Drive Nov 17-21.",
+        "events": [
+            {"title": "Election Day Bake Sale", "date": "2025-11-04", "date_display": "Tuesday, November 4", "category": "fundraiser", "details": "7-10 AM, 12-2 PM & 4-7 PM. Baked goods and volunteers needed.", "links": []},
+            {"title": "PTA General Meeting", "date": "2025-11-12", "date_display": "Wednesday, November 12", "category": "meeting", "details": "8:00-9:00 PM ET via Zoom.", "links": []},
+            {"title": "Veterans Day March", "date": "2025-11-14", "date_display": "Friday, November 14", "category": "school-event", "details": "9:30 AM on Stagg Field.", "links": []},
+            {"title": "Food Drive", "date_start": "2025-11-17", "date_end": "2025-11-21", "date_display": "November 17-21", "category": "community-event", "details": "Collecting shelf-stable food.", "links": []},
+            {"title": "Holiday Bazaar - Vendors Wanted", "date": "2025-12-06", "date_display": "Saturday, December 6", "category": "community-event", "details": "Table cost: $35 + item donation for raffle.", "links": [{"label": "Sign Up", "url": "https://bit.ly/schb2025"}]},
+            {"title": "Honored National Teaching Award", "date": None, "date_display": "Ongoing", "category": "school-event", "details": "Nominate your teacher for the $5,000 Honored National Teaching Award.", "links": []}
+        ]
+    },
+    {
+        "folder_date": "2025-10-22",
+        "pdf_file": "2025-10-22_wednesday_folder.pdf",
+        "summary": "Diversity Council meeting Oct 29, Holiday Bazaar vendors wanted, Election Day Bake Sale Nov 4, Teacher Award nominations.",
+        "events": [
+            {"title": "Diversity Council Meeting", "date": "2025-10-29", "date_display": "Wednesday, October 29", "category": "meeting", "details": "8:30 PM on Zoom. Join at bit.ly/StCloudDiversityCouncil", "links": [{"label": "Join Meeting", "url": "https://bit.ly/StCloudDiversityCouncil"}]},
+            {"title": "Election Day Bake Sale", "date": "2025-11-04", "date_display": "Tuesday, November 4", "category": "fundraiser", "details": "7-10 AM, 12-2 PM & 4-7 PM. Volunteers and baked goods needed.", "links": []},
+            {"title": "Holiday Bazaar - Vendors Wanted", "date": "2025-12-06", "date_display": "Saturday, December 6", "category": "community-event", "details": "Table cost: $35 + item donation for raffle.", "links": [{"label": "Sign Up", "url": "https://bit.ly/schb2025"}]},
+            {"title": "Honored National Teaching Award", "date": None, "date_display": "Ongoing", "category": "school-event", "details": "Nominate your teacher for the $5,000 award.", "links": []}
+        ]
+    },
+    {
+        "folder_date": "2025-10-15",
+        "pdf_file": "2025-10-15_wednesday_folder.pdf",
+        "summary": "Trunk or Treat this Saturday (Oct 18), Election Day Bake Sale coming Nov 4, Teacher Award nominations, Costume Drive ongoing.",
+        "events": [
+            {"title": "Trunk or Treat", "date": "2025-10-18", "date_display": "Saturday, October 18", "category": "community-event", "details": "2-4 PM. Looking for a few more volunteers at bit.ly/totvolunteer25. Trunks & best dressed groups.", "links": [{"label": "Volunteer", "url": "https://bit.ly/totvolunteer25"}]},
+            {"title": "Election Day Bake Sale", "date": "2025-11-04", "date_display": "Tuesday, November 4", "category": "fundraiser", "details": "7-10 AM, 12-2 PM & 4-7 PM. Volunteers and baked goods needed.", "links": []},
+            {"title": "Costume Drive", "date": None, "date_display": "Through October", "category": "volunteer", "details": "Accepting new or lightly used costumes, masks, accessories, and collection pails. Collection site at school.", "links": []},
+            {"title": "Honored National Teaching Award", "date": None, "date_display": "Ongoing", "category": "school-event", "details": "Nominate your teacher for the $5,000 award.", "links": []}
+        ]
+    },
+    {
+        "folder_date": "2025-10-08",
+        "pdf_file": "2025-10-08_wednesday_folder.pdf",
+        "summary": "PTA Meeting tonight, Trunk or Treat Oct 18 (volunteers needed), treat donations needed, Costume Drive, Fall Celebration Character Parade.",
+        "events": [
+            {"title": "PTA General Meeting", "date": "2025-10-08", "date_display": "Wednesday, October 8", "category": "meeting", "details": "8:00-9:00 PM ET via Zoom.", "links": []},
+            {"title": "Trunk or Treat", "date": "2025-10-18", "date_display": "Saturday, October 18", "category": "community-event", "details": "2-4 PM. Volunteers needed. Host a trunk!", "links": []},
+            {"title": "Treat Donations Needed", "date": None, "date_display": "Through Oct 18", "category": "volunteer", "details": "Regular candy and allergy-friendly candy (Starbursts, Smarties, Dum Dums, Swedish Fish).", "links": []},
+            {"title": "Costume Drive", "date": None, "date_display": "Through October", "category": "volunteer", "details": "Accepting new or lightly used costumes, masks, accessories.", "links": []},
+            {"title": "Fall Celebration / Character Parade", "date": None, "date_display": "Coming soon", "category": "school-event", "details": "Halloween character parade at school.", "links": []}
+        ]
+    },
+    {
+        "folder_date": "2025-10-01",
+        "pdf_file": "2025-10-01_wednesday_folder.pdf",
+        "summary": "Diversity Council meeting tonight (Oct 1), Trunk or Treat Oct 18, PTA Meeting Oct 8, treat donations needed, Costume Drive, Spirit Day Oct 3.",
+        "events": [
+            {"title": "Diversity Council Meeting", "date": "2025-10-01", "date_display": "Wednesday, October 1", "category": "meeting", "details": "8:30 PM on Zoom.", "links": []},
+            {"title": "Spirit Day", "date": "2025-10-03", "date_display": "Friday, October 3", "category": "school-spirit", "details": "Wear spirit wear or any red & white outfit!", "links": []},
+            {"title": "PTA General Meeting", "date": "2025-10-08", "date_display": "Wednesday, October 8", "category": "meeting", "details": "8:00-9:00 PM ET via Zoom.", "links": []},
+            {"title": "Trunk or Treat", "date": "2025-10-18", "date_display": "Saturday, October 18", "category": "community-event", "details": "2-4 PM. Volunteers needed to host a trunk.", "links": []},
+            {"title": "Treat Donations", "date": None, "date_display": "Through Oct 18", "category": "volunteer", "details": "Regular and allergy-friendly candy needed for Trunk or Treat.", "links": []},
+            {"title": "Costume Drive", "date": None, "date_display": "Through October", "category": "volunteer", "details": "New or lightly used costumes, masks, accessories, collection pails.", "links": []}
+        ]
+    },
+    {
+        "folder_date": "2025-09-17",
+        "pdf_file": "2025-09-17_wednesday_folder.pdf",
+        "summary": "First PTA Meeting tonight (Sep 17), ASP fall enrollment open, Diversity Council first meeting Sep 24, Trunk or Treat Oct 18, Costume Drive starts, Spirit Day Oct 3.",
+        "events": [
+            {"title": "PTA General Meeting", "date": "2025-09-17", "date_display": "Wednesday, September 17", "category": "meeting", "details": "FIRST meeting of 2025-26 school year! 7:30-8:30 PM ET via Zoom.", "links": []},
+            {"title": "After School Program (ASP) - Fall", "date": None, "date_display": "Enrollment open", "category": "deadline", "details": "Fall ASP enrollment. ASP also looking for program volunteers.", "links": []},
+            {"title": "Diversity Council First Meeting", "date": "2025-09-24", "date_display": "Wednesday, September 24", "category": "meeting", "details": "8:30 PM on Zoom.", "links": []},
+            {"title": "Spirit Day", "date": "2025-10-03", "date_display": "Friday, October 3", "category": "school-spirit", "details": "Wear spirit wear or red & white.", "links": []},
+            {"title": "Costume Drive Starts", "date": "2025-09-16", "date_display": "September 16", "category": "volunteer", "details": "New or lightly used costumes, masks, accessories for Trunk or Treat.", "links": []},
+            {"title": "Trunk or Treat", "date": "2025-10-18", "date_display": "Saturday, October 18", "category": "community-event", "details": "2-4 PM. Host a trunk!", "links": []},
+            {"title": "Cold & Flu Season Reminder", "date": None, "date_display": "2025-26", "category": "school-event", "details": "Health guidelines for the school year.", "links": []}
+        ]
+    }
+]
+
+
+def build_events_json():
+    events_data = {
+        "school": "St. Cloud Elementary School",
+        "mascot": "Jaguars",
+        "last_updated": "2026-03-05",
+        "weeks": ALL_WEEKS
+    }
+
+    output_path = DATA_DIR / "events.json"
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(events_data, f, indent=2, ensure_ascii=False)
+
+    total_events = sum(len(w['events']) for w in ALL_WEEKS)
+    print(f"Built events.json: {len(ALL_WEEKS)} weeks, {total_events} events")
+    return output_path
+
+
+if __name__ == "__main__":
+    build_events_json()
