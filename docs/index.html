@@ -158,6 +158,24 @@
 
         .no-events { text-align: center; padding: 40px; color: var(--text-light); }
 
+        .event-details a, .event-links a {
+            color: var(--blue);
+            text-decoration: underline;
+            word-break: break-all;
+        }
+        .event-details a:hover, .event-links a:hover {
+            color: #2980b9;
+        }
+        .event-links {
+            margin-top: 8px;
+            font-size: 0.9em;
+        }
+        .event-links a {
+            display: inline-block;
+            margin-right: 14px;
+            padding: 3px 0;
+        }
+
         @media (max-width: 600px) {
             header h1 { font-size: 1.3em; }
             .container { padding: 10px; }
@@ -196,9 +214,16 @@
 
 <script>
 // Events data - embedded directly for GitHub Pages (no server needed)
-const DATA = {"school": "St. Cloud Elementary School", "mascot": "Jaguars", "last_updated": "2026-03-05", "weeks": [{"folder_date": "2026-03-04", "pdf_file": "2026-03-04_wednesday_folder.pdf", "summary": "Big week with Chipotle fundraiser tonight (Mar 4), ASP registration closing Sunday Mar 8, Ice Skating Night on Mar 13, PTA meeting Mar 11, Career Week Mar 17-20, and Read Across America dress-up week happening now (Mar 2-6).", "events": [{"title": "Chipotle Fundraiser Night", "date": "2026-03-04", "date_display": "Tuesday, March 4", "category": "fundraiser", "urgency": "today", "details": "Dine at Chipotle tonight - portion of sales goes to PTA."}, {"title": "Read Across America Dress-Up Week", "date_start": "2026-03-02", "date_end": "2026-03-06", "date_display": "March 2-6 (this week)", "category": "school-spirit", "urgency": "this-week", "details": "Mon: Dress as favorite book character. Tue: Bring a stuffie to read with. Wed: Jaguar Day - school gear/colors/animal print. Thu: PJ Day - snuggle up with a good book. Fri: Dress as favorite animal or athlete (Non-fiction Day)."}, {"title": "After School Program (ASP) Registration Deadline", "date": "2026-03-08", "date_display": "Sunday, March 8", "category": "deadline", "urgency": "this-week", "details": "Spring ASP registration closes. Classes still available: Magic of Mindfulness (Wed, Gr 3-5), World Cup Warmup (Thu, Gr 3-5), Arts & Crafts, Lego Club, Beyblade Battle, Junk Journaling, Adventure Camp, Yoga, Word Wizards. Register at bit.ly/aspstcloud or homeroom.com. Email: asp@stcloudpta.org"}, {"title": "PTA General Meeting", "date": "2026-03-11", "date_display": "Wednesday, March 11", "category": "meeting", "urgency": "next-week", "details": "8:00-9:00 PM ET via Zoom. Special guests: Liberty & Roosevelt principals discussing middle school transitions. Zoom link to follow via PTA newsletters."}, {"title": "Family Ice Skating Night", "date": "2026-03-13", "date_display": "Friday, March 13", "category": "community-event", "urgency": "next-week", "details": "$5 per person at Codey Arena, 560 Northfield Avenue, 6:30-8:00 PM. Free skate rentals for PTA members. Register at bit.ly/stcloudskate26. Volunteers needed."}, {"title": "Career Week", "date_start": "2026-03-17", "date_end": "2026-03-20", "date_display": "March 17-20", "category": "school-event", "urgency": "upcoming", "details": "Sign up at tinyurl.com/StCloudCareerWeek to participate/volunteer."}, {"title": "Family STEM Festival - Volunteers Needed", "date": null, "date_display": "Spring 2026 (date TBD)", "category": "volunteer", "urgency": "ongoing", "details": "Grant-funded event. Need volunteers for logistics, outreach, hands-on STEM activities, donations/sponsors. Subcommittee planning via Zoom. Contact grants@stcloudpta.org"}, {"title": "Diversity Council - Heritage Month Contributions", "date": null, "date_display": "Ongoing", "category": "volunteer", "urgency": "ongoing", "details": "Seeking families with info to share for Women's History Month, Black History Month, Lunar New Year. Contact diversitycouncilstc@gmail.com"}, {"title": "PTA Matching Gifts via Benevity", "date": null, "date_display": "Ongoing", "category": "fundraiser", "urgency": "ongoing", "details": "PTA accepts matching gifts through Benevity. Check with employer to double your donation. PTA TIN: 51-0224833"}, {"title": "PTA Membership", "date": null, "date_display": "2025-26 School Year", "category": "membership", "urgency": "ongoing", "details": "$15 membership supports volunteer opportunities, cultural enrichment, community events, school assemblies, teacher appreciation, school improvements. Join at bit.ly/scpta2526 or email membership@stcloudpta.org"}]}]};
+const DATA = {"school": "St. Cloud Elementary School", "mascot": "Jaguars", "last_updated": "2026-03-05", "weeks": [{"folder_date": "2026-03-04", "pdf_file": "2026-03-04_wednesday_folder.pdf", "summary": "Big week with Chipotle fundraiser tonight (Mar 4), ASP registration closing Sunday Mar 8, Ice Skating Night on Mar 13, PTA meeting Mar 11, Career Week Mar 17-20, and Read Across America dress-up week happening now (Mar 2-6).", "events": [{"title": "Chipotle Fundraiser Night", "date": "2026-03-04", "date_display": "Tuesday, March 4", "category": "fundraiser", "urgency": "today", "details": "Dine at Chipotle tonight - portion of sales goes to PTA.", "links": []}, {"title": "Read Across America Dress-Up Week", "date_start": "2026-03-02", "date_end": "2026-03-06", "date_display": "March 2-6 (this week)", "category": "school-spirit", "urgency": "this-week", "details": "Mon: Dress as favorite book character. Tue: Bring a stuffie to read with. Wed: Jaguar Day - school gear/colors/animal print. Thu: PJ Day - snuggle up with a good book. Fri: Dress as favorite animal or athlete (Non-fiction Day).", "links": []}, {"title": "After School Program (ASP) Registration Deadline", "date": "2026-03-08", "date_display": "Sunday, March 8", "category": "deadline", "urgency": "this-week", "details": "Spring ASP registration closes. Classes still available: Magic of Mindfulness (Wed, Gr 3-5), World Cup Warmup (Thu, Gr 3-5), Arts & Crafts, Lego Club, Beyblade Battle, Junk Journaling, Adventure Camp, Yoga, Word Wizards. Email: asp@stcloudpta.org", "links": [{"label": "Register for ASP", "url": "https://bit.ly/aspstcloud"}, {"label": "Homeroom.com", "url": "https://homeroom.com"}]}, {"title": "PTA General Meeting", "date": "2026-03-11", "date_display": "Wednesday, March 11", "category": "meeting", "urgency": "next-week", "details": "8:00-9:00 PM ET via Zoom. Special guests: Liberty & Roosevelt principals discussing middle school transitions. Zoom link to follow via PTA newsletters.", "links": []}, {"title": "Family Ice Skating Night", "date": "2026-03-13", "date_display": "Friday, March 13", "category": "community-event", "urgency": "next-week", "details": "$5 per person at Codey Arena, 560 Northfield Avenue, 6:30-8:00 PM. Free skate rentals for PTA members. Volunteers needed.", "links": [{"label": "Register / Volunteer", "url": "https://bit.ly/stcloudskate26"}]}, {"title": "Career Week", "date_start": "2026-03-17", "date_end": "2026-03-20", "date_display": "March 17-20", "category": "school-event", "urgency": "upcoming", "details": "Sign up to participate or volunteer for Career Week.", "links": [{"label": "Sign Up for Career Week", "url": "https://tinyurl.com/StCloudCareerWeek"}]}, {"title": "Family STEM Festival - Volunteers Needed", "date": null, "date_display": "Spring 2026 (date TBD)", "category": "volunteer", "urgency": "ongoing", "details": "Grant-funded event. Need volunteers for logistics, outreach, hands-on STEM activities, donations/sponsors. Subcommittee planning via Zoom. Contact grants@stcloudpta.org", "links": []}, {"title": "Diversity Council - Heritage Month Contributions", "date": null, "date_display": "Ongoing", "category": "volunteer", "urgency": "ongoing", "details": "Seeking families with info to share for Women's History Month, Black History Month, Lunar New Year. Contact diversitycouncilstc@gmail.com", "links": []}, {"title": "PTA Matching Gifts via Benevity", "date": null, "date_display": "Ongoing", "category": "fundraiser", "urgency": "ongoing", "details": "PTA accepts matching gifts through Benevity. Check with employer to double your donation. PTA TIN: 51-0224833", "links": []}, {"title": "PTA Membership", "date": null, "date_display": "2025-26 School Year", "category": "membership", "urgency": "ongoing", "details": "$15 membership supports volunteer opportunities, cultural enrichment, community events, school assemblies, teacher appreciation, school improvements. Email membership@stcloudpta.org", "links": [{"label": "Join the PTA", "url": "https://bit.ly/scpta2526"}]}]}]};
 
 const today = new Date().toISOString().split('T')[0];
+
+function linkify(text) {
+    return text.replace(/(https?:\/\/[^\s<,)]+|bit\.ly\/[^\s<,)]+|tinyurl\.com\/[^\s<,)]+)/gi, function(url) {
+        const href = url.match(/^https?:\/\//) ? url : 'https://' + url;
+        return `<a href="${href}" target="_blank" rel="noopener">${url}</a>`;
+    });
+}
 
 const urgencyOrder = { 'today': 0, 'this-week': 1, 'next-week': 2, 'upcoming': 3, 'ongoing': 4 };
 const urgencyLabels = {
@@ -283,11 +308,15 @@ function renderEvents(filter = 'all') {
                 <h2>${label}</h2>
             </div>`;
         groups[urgency].forEach(e => {
+            const linksHtml = (e.links && e.links.length)
+                ? `<div class="event-links">${e.links.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join(' ')}</div>`
+                : '';
             html += `
                 <div class="event-card ${urgency}">
                     <div class="event-title">${e.title}</div>
                     <div class="event-date">${e.date_display}</div>
-                    <div class="event-details">${e.details}</div>
+                    <div class="event-details">${linkify(e.details)}</div>
+                    ${linksHtml}
                     <span class="event-category">${e.category.replace('-', ' ')}</span>
                 </div>`;
         });

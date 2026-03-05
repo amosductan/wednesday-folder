@@ -14,7 +14,8 @@
           "date_display": "Tuesday, March 4",
           "category": "fundraiser",
           "urgency": "today",
-          "details": "Dine at Chipotle tonight - portion of sales goes to PTA."
+          "details": "Dine at Chipotle tonight - portion of sales goes to PTA.",
+          "links": []
         },
         {
           "title": "Read Across America Dress-Up Week",
@@ -23,7 +24,8 @@
           "date_display": "March 2-6 (this week)",
           "category": "school-spirit",
           "urgency": "this-week",
-          "details": "Mon: Dress as favorite book character. Tue: Bring a stuffie to read with. Wed: Jaguar Day - school gear/colors/animal print. Thu: PJ Day - snuggle up with a good book. Fri: Dress as favorite animal or athlete (Non-fiction Day)."
+          "details": "Mon: Dress as favorite book character. Tue: Bring a stuffie to read with. Wed: Jaguar Day - school gear/colors/animal print. Thu: PJ Day - snuggle up with a good book. Fri: Dress as favorite animal or athlete (Non-fiction Day).",
+          "links": []
         },
         {
           "title": "After School Program (ASP) Registration Deadline",
@@ -31,7 +33,11 @@
           "date_display": "Sunday, March 8",
           "category": "deadline",
           "urgency": "this-week",
-          "details": "Spring ASP registration closes. Classes still available: Magic of Mindfulness (Wed, Gr 3-5), World Cup Warmup (Thu, Gr 3-5), Arts & Crafts, Lego Club, Beyblade Battle, Junk Journaling, Adventure Camp, Yoga, Word Wizards. Register at bit.ly/aspstcloud or homeroom.com. Email: asp@stcloudpta.org"
+          "details": "Spring ASP registration closes. Classes still available: Magic of Mindfulness (Wed, Gr 3-5), World Cup Warmup (Thu, Gr 3-5), Arts & Crafts, Lego Club, Beyblade Battle, Junk Journaling, Adventure Camp, Yoga, Word Wizards. Email: asp@stcloudpta.org",
+          "links": [
+            {"label": "Register for ASP", "url": "https://bit.ly/aspstcloud"},
+            {"label": "Homeroom.com", "url": "https://homeroom.com"}
+          ]
         },
         {
           "title": "PTA General Meeting",
@@ -39,7 +45,8 @@
           "date_display": "Wednesday, March 11",
           "category": "meeting",
           "urgency": "next-week",
-          "details": "8:00-9:00 PM ET via Zoom. Special guests: Liberty & Roosevelt principals discussing middle school transitions. Zoom link to follow via PTA newsletters."
+          "details": "8:00-9:00 PM ET via Zoom. Special guests: Liberty & Roosevelt principals discussing middle school transitions. Zoom link to follow via PTA newsletters.",
+          "links": []
         },
         {
           "title": "Family Ice Skating Night",
@@ -47,7 +54,10 @@
           "date_display": "Friday, March 13",
           "category": "community-event",
           "urgency": "next-week",
-          "details": "$5 per person at Codey Arena, 560 Northfield Avenue, 6:30-8:00 PM. Free skate rentals for PTA members. Register at bit.ly/stcloudskate26. Volunteers needed."
+          "details": "$5 per person at Codey Arena, 560 Northfield Avenue, 6:30-8:00 PM. Free skate rentals for PTA members. Volunteers needed.",
+          "links": [
+            {"label": "Register / Volunteer", "url": "https://bit.ly/stcloudskate26"}
+          ]
         },
         {
           "title": "Career Week",
@@ -56,7 +66,10 @@
           "date_display": "March 17-20",
           "category": "school-event",
           "urgency": "upcoming",
-          "details": "Sign up at tinyurl.com/StCloudCareerWeek to participate/volunteer."
+          "details": "Sign up to participate or volunteer for Career Week.",
+          "links": [
+            {"label": "Sign Up for Career Week", "url": "https://tinyurl.com/StCloudCareerWeek"}
+          ]
         },
         {
           "title": "Family STEM Festival - Volunteers Needed",
@@ -64,7 +77,8 @@
           "date_display": "Spring 2026 (date TBD)",
           "category": "volunteer",
           "urgency": "ongoing",
-          "details": "Grant-funded event. Need volunteers for logistics, outreach, hands-on STEM activities, donations/sponsors. Subcommittee planning via Zoom. Contact grants@stcloudpta.org"
+          "details": "Grant-funded event. Need volunteers for logistics, outreach, hands-on STEM activities, donations/sponsors. Subcommittee planning via Zoom. Contact grants@stcloudpta.org",
+          "links": []
         },
         {
           "title": "Diversity Council - Heritage Month Contributions",
@@ -72,7 +86,8 @@
           "date_display": "Ongoing",
           "category": "volunteer",
           "urgency": "ongoing",
-          "details": "Seeking families with info to share for Women's History Month, Black History Month, Lunar New Year. Contact diversitycouncilstc@gmail.com"
+          "details": "Seeking families with info to share for Women's History Month, Black History Month, Lunar New Year. Contact diversitycouncilstc@gmail.com",
+          "links": []
         },
         {
           "title": "PTA Matching Gifts via Benevity",
@@ -80,7 +95,8 @@
           "date_display": "Ongoing",
           "category": "fundraiser",
           "urgency": "ongoing",
-          "details": "PTA accepts matching gifts through Benevity. Check with employer to double your donation. PTA TIN: 51-0224833"
+          "details": "PTA accepts matching gifts through Benevity. Check with employer to double your donation. PTA TIN: 51-0224833",
+          "links": []
         },
         {
           "title": "PTA Membership",
@@ -88,7 +104,10 @@
           "date_display": "2025-26 School Year",
           "category": "membership",
           "urgency": "ongoing",
-          "details": "$15 membership supports volunteer opportunities, cultural enrichment, community events, school assemblies, teacher appreciation, school improvements. Join at bit.ly/scpta2526 or email membership@stcloudpta.org"
+          "details": "$15 membership supports volunteer opportunities, cultural enrichment, community events, school assemblies, teacher appreciation, school improvements. Email membership@stcloudpta.org",
+          "links": [
+            {"label": "Join the PTA", "url": "https://bit.ly/scpta2526"}
+          ]
         }
       ]
     }

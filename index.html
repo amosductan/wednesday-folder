@@ -158,6 +158,24 @@
 
         .no-events { text-align: center; padding: 40px; color: var(--text-light); }
 
+        .event-details a, .event-links a {
+            color: var(--blue);
+            text-decoration: underline;
+            word-break: break-all;
+        }
+        .event-details a:hover, .event-links a:hover {
+            color: #2980b9;
+        }
+        .event-links {
+            margin-top: 8px;
+            font-size: 0.9em;
+        }
+        .event-links a {
+            display: inline-block;
+            margin-right: 14px;
+            padding: 3px 0;
+        }
+
         @media (max-width: 600px) {
             header h1 { font-size: 1.3em; }
             .container { padding: 10px; }
@@ -199,6 +217,13 @@
 const DATA = EVENTS_DATA_PLACEHOLDER;
 
 const today = new Date().toISOString().split('T')[0];
+
+function linkify(text) {
+    return text.replace(/(https?:\/\/[^\s<,)]+|bit\.ly\/[^\s<,)]+|tinyurl\.com\/[^\s<,)]+)/gi, function(url) {
+        const href = url.match(/^https?:\/\//) ? url : 'https://' + url;
+        return `<a href="${href}" target="_blank" rel="noopener">${url}</a>`;
+    });
+}
 
 const urgencyOrder = { 'today': 0, 'this-week': 1, 'next-week': 2, 'upcoming': 3, 'ongoing': 4 };
 const urgencyLabels = {
@@ -283,11 +308,15 @@ function renderEvents(filter = 'all') {
                 <h2>${label}</h2>
             </div>`;
         groups[urgency].forEach(e => {
+            const linksHtml = (e.links && e.links.length)
+                ? `<div class="event-links">${e.links.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join(' ')}</div>`
+                : '';
             html += `
                 <div class="event-card ${urgency}">
                     <div class="event-title">${e.title}</div>
                     <div class="event-date">${e.date_display}</div>
-                    <div class="event-details">${e.details}</div>
+                    <div class="event-details">${linkify(e.details)}</div>
+                    ${linksHtml}
                     <span class="event-category">${e.category.replace('-', ' ')}</span>
                 </div>`;
         });
