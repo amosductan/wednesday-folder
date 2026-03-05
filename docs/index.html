@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St. Cloud Elementary - Wednesday Folder</title>
+    <style>
+        :root {
+            --blue: #1a5276;
+            --gold: #f39c12;
+            --green: #27ae60;
+            --red: #e74c3c;
+            --orange: #e67e22;
+            --gray: #95a5a6;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, var(--blue), #2980b9);
+            color: white;
+            padding: 24px 20px;
+            text-align: center;
+        }
+        header h1 { font-size: 1.6em; margin-bottom: 4px; }
+        header .subtitle { opacity: 0.85; font-size: 0.95em; }
+        .last-updated {
+            text-align: center;
+            padding: 10px;
+            font-size: 0.85em;
+            color: var(--text-light);
+            background: #eef2f7;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 16px; }
+
+        /* Urgency sections */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 24px 0 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #ddd;
+        }
+        .section-header h2 { font-size: 1.15em; }
+        .urgency-dot {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+        .urgency-dot.today { background: var(--red); }
+        .urgency-dot.this-week { background: var(--orange); }
+        .urgency-dot.next-week { background: var(--gold); }
+        .urgency-dot.upcoming { background: var(--green); }
+        .urgency-dot.ongoing { background: var(--gray); }
+
+        /* Event cards */
+        .event-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            border-left: 4px solid #ddd;
+            transition: transform 0.1s;
+        }
+        .event-card:hover { transform: translateX(2px); }
+        .event-card.today { border-left-color: var(--red); }
+        .event-card.this-week { border-left-color: var(--orange); }
+        .event-card.next-week { border-left-color: var(--gold); }
+        .event-card.upcoming { border-left-color: var(--green); }
+        .event-card.ongoing { border-left-color: var(--gray); }
+
+        .event-title { font-weight: 700; font-size: 1.05em; margin-bottom: 2px; }
+        .event-date { font-size: 0.88em; color: var(--text-light); margin-bottom: 6px; }
+        .event-details { font-size: 0.92em; }
+        .event-category {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 12px;
+            background: #eef2f7;
+            color: var(--text-light);
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Week summary */
+        .week-summary {
+            background: linear-gradient(135deg, #eaf2f8, #ebf5fb);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            border: 1px solid #d4e6f1;
+        }
+        .week-summary strong { color: var(--blue); }
+
+        /* Past expired events */
+        .event-card.expired {
+            opacity: 0.5;
+            border-left-color: #ccc;
+        }
+        .event-card.expired .event-title::after {
+            content: " (PAST)";
+            font-size: 0.8em;
+            color: var(--gray);
+            font-weight: normal;
+        }
+
+        /* Archive */
+        .archive-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+        }
+        .archive-section h2 { margin-bottom: 12px; color: var(--blue); }
+        .archive-item {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            cursor: pointer;
+        }
+        .archive-item:hover { background: #f0f4f8; }
+        .archive-item .date { font-weight: 600; }
+        .archive-item .count { color: var(--text-light); font-size: 0.9em; }
+
+        /* Filter tabs */
+        .filter-bar {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 16px 0;
+        }
+        .filter-btn {
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover { border-color: var(--blue); color: var(--blue); }
+        .filter-btn.active { background: var(--blue); color: white; border-color: var(--blue); }
+
+        .no-events { text-align: center; padding: 40px; color: var(--text-light); }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.3em; }
+            .container { padding: 10px; }
+            .event-card { padding: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>St. Cloud Elementary - Wednesday Folder</h1>
+    <div class="subtitle">Jaguars PTA Updates & Events</div>
+</header>
+<div class="last-updated" id="lastUpdated"></div>
+
+<div class="container">
+    <div class="week-summary" id="weekSummary"></div>
+
+    <div class="filter-bar" id="filterBar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="action-needed">Action Needed</button>
+        <button class="filter-btn" data-filter="school-event">School Events</button>
+        <button class="filter-btn" data-filter="community-event">Community</button>
+        <button class="filter-btn" data-filter="fundraiser">Fundraiser</button>
+        <button class="filter-btn" data-filter="deadline">Deadlines</button>
+        <button class="filter-btn" data-filter="volunteer">Volunteer</button>
+    </div>
+
+    <div id="eventsContainer"></div>
+
+    <div class="archive-section" id="archiveSection">
+        <h2>Past Weeks</h2>
+        <div id="archiveList"></div>
+    </div>
+</div>
+
+<script>
+// Events data - embedded directly for GitHub Pages (no server needed)
+const DATA = {"school": "St. Cloud Elementary School", "mascot": "Jaguars", "last_updated": "2026-03-05", "weeks": [{"folder_date": "2026-03-04", "pdf_file": "2026-03-04_wednesday_folder.pdf", "summary": "Big week with Chipotle fundraiser tonight (Mar 4), ASP registration closing Sunday Mar 8, Ice Skating Night on Mar 13, PTA meeting Mar 11, Career Week Mar 17-20, and Read Across America dress-up week happening now (Mar 2-6).", "events": [{"title": "Chipotle Fundraiser Night", "date": "2026-03-04", "date_display": "Tuesday, March 4", "category": "fundraiser", "urgency": "today", "details": "Dine at Chipotle tonight - portion of sales goes to PTA."}, {"title": "Read Across America Dress-Up Week", "date_start": "2026-03-02", "date_end": "2026-03-06", "date_display": "March 2-6 (this week)", "category": "school-spirit", "urgency": "this-week", "details": "Mon: Dress as favorite book character. Tue: Bring a stuffie to read with. Wed: Jaguar Day - school gear/colors/animal print. Thu: PJ Day - snuggle up with a good book. Fri: Dress as favorite animal or athlete (Non-fiction Day)."}, {"title": "After School Program (ASP) Registration Deadline", "date": "2026-03-08", "date_display": "Sunday, March 8", "category": "deadline", "urgency": "this-week", "details": "Spring ASP registration closes. Classes still available: Magic of Mindfulness (Wed, Gr 3-5), World Cup Warmup (Thu, Gr 3-5), Arts & Crafts, Lego Club, Beyblade Battle, Junk Journaling, Adventure Camp, Yoga, Word Wizards. Register at bit.ly/aspstcloud or homeroom.com. Email: asp@stcloudpta.org"}, {"title": "PTA General Meeting", "date": "2026-03-11", "date_display": "Wednesday, March 11", "category": "meeting", "urgency": "next-week", "details": "8:00-9:00 PM ET via Zoom. Special guests: Liberty & Roosevelt principals discussing middle school transitions. Zoom link to follow via PTA newsletters."}, {"title": "Family Ice Skating Night", "date": "2026-03-13", "date_display": "Friday, March 13", "category": "community-event", "urgency": "next-week", "details": "$5 per person at Codey Arena, 560 Northfield Avenue, 6:30-8:00 PM. Free skate rentals for PTA members. Register at bit.ly/stcloudskate26. Volunteers needed."}, {"title": "Career Week", "date_start": "2026-03-17", "date_end": "2026-03-20", "date_display": "March 17-20", "category": "school-event", "urgency": "upcoming", "details": "Sign up at tinyurl.com/StCloudCareerWeek to participate/volunteer."}, {"title": "Family STEM Festival - Volunteers Needed", "date": null, "date_display": "Spring 2026 (date TBD)", "category": "volunteer", "urgency": "ongoing", "details": "Grant-funded event. Need volunteers for logistics, outreach, hands-on STEM activities, donations/sponsors. Subcommittee planning via Zoom. Contact grants@stcloudpta.org"}, {"title": "Diversity Council - Heritage Month Contributions", "date": null, "date_display": "Ongoing", "category": "volunteer", "urgency": "ongoing", "details": "Seeking families with info to share for Women's History Month, Black History Month, Lunar New Year. Contact diversitycouncilstc@gmail.com"}, {"title": "PTA Matching Gifts via Benevity", "date": null, "date_display": "Ongoing", "category": "fundraiser", "urgency": "ongoing", "details": "PTA accepts matching gifts through Benevity. Check with employer to double your donation. PTA TIN: 51-0224833"}, {"title": "PTA Membership", "date": null, "date_display": "2025-26 School Year", "category": "membership", "urgency": "ongoing", "details": "$15 membership supports volunteer opportunities, cultural enrichment, community events, school assemblies, teacher appreciation, school improvements. Join at bit.ly/scpta2526 or email membership@stcloudpta.org"}]}]};
+
+const today = new Date().toISOString().split('T')[0];
+
+const urgencyOrder = { 'today': 0, 'this-week': 1, 'next-week': 2, 'upcoming': 3, 'ongoing': 4 };
+const urgencyLabels = {
+    'today': 'Today',
+    'this-week': 'This Week',
+    'next-week': 'Next Week',
+    'upcoming': 'Coming Up',
+    'ongoing': 'Ongoing'
+};
+
+function getUrgency(event) {
+    const eventDate = event.date || event.date_start;
+    const eventEnd = event.date_end || event.date;
+    if (!eventDate) return 'ongoing';
+    if (eventEnd && eventEnd < today) return 'expired';
+    if (eventDate === today) return 'today';
+
+    const todayDate = new Date(today);
+    const evDate = new Date(eventDate);
+    const diffDays = Math.ceil((evDate - todayDate) / (1000 * 60 * 60 * 24));
+
+    if (diffDays < 0) {
+        // Event started in past but may still be ongoing
+        if (eventEnd && eventEnd >= today) return 'this-week';
+        return 'expired';
+    }
+    if (diffDays <= 3) return 'this-week';
+    if (diffDays <= 10) return 'next-week';
+    return 'upcoming';
+}
+
+function renderEvents(filter = 'all') {
+    const container = document.getElementById('eventsContainer');
+    const latestWeek = DATA.weeks[0];
+    if (!latestWeek) {
+        container.innerHTML = '<div class="no-events">No events yet. Check back after the next Wednesday Folder!</div>';
+        return;
+    }
+
+    // Update header info
+    document.getElementById('lastUpdated').textContent =
+        `Last updated: ${new Date(DATA.last_updated).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`;
+    document.getElementById('weekSummary').innerHTML =
+        `<strong>This Week's Highlights:</strong> ${latestWeek.summary}`;
+
+    // Recalculate urgency dynamically
+    let events = latestWeek.events.map(e => ({
+        ...e,
+        _urgency: getUrgency(e)
+    }));
+
+    // Filter
+    if (filter === 'action-needed') {
+        events = events.filter(e => ['today', 'this-week', 'next-week'].includes(e._urgency));
+    } else if (filter !== 'all') {
+        events = events.filter(e => e.category === filter);
+    }
+
+    // Sort by urgency
+    events.sort((a, b) => {
+        const ua = urgencyOrder[a._urgency] ?? 5;
+        const ub = urgencyOrder[b._urgency] ?? 5;
+        return ua - ub;
+    });
+
+    // Group by urgency
+    const groups = {};
+    events.forEach(e => {
+        const u = e._urgency;
+        if (!groups[u]) groups[u] = [];
+        groups[u].push(e);
+    });
+
+    let html = '';
+    const order = ['today', 'this-week', 'next-week', 'upcoming', 'ongoing', 'expired'];
+    order.forEach(urgency => {
+        if (!groups[urgency]) return;
+        const label = urgencyLabels[urgency] || 'Past';
+        html += `
+            <div class="section-header">
+                <span class="urgency-dot ${urgency}"></span>
+                <h2>${label}</h2>
+            </div>`;
+        groups[urgency].forEach(e => {
+            html += `
+                <div class="event-card ${urgency}">
+                    <div class="event-title">${e.title}</div>
+                    <div class="event-date">${e.date_display}</div>
+                    <div class="event-details">${e.details}</div>
+                    <span class="event-category">${e.category.replace('-', ' ')}</span>
+                </div>`;
+        });
+    });
+
+    if (!html) {
+        html = '<div class="no-events">No events match this filter.</div>';
+    }
+
+    container.innerHTML = html;
+
+    // Archive
+    const archiveList = document.getElementById('archiveList');
+    if (DATA.weeks.length > 1) {
+        archiveList.innerHTML = DATA.weeks.slice(1).map(w => `
+            <div class="archive-item">
+                <span class="date">${new Date(w.folder_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+                <span class="count"> - ${w.events.length} items</span>
+            </div>
+        `).join('');
+        document.getElementById('archiveSection').style.display = 'block';
+    } else {
+        document.getElementById('archiveSection').style.display = 'none';
+    }
+}
+
+// Filter buttons
+document.getElementById('filterBar').addEventListener('click', e => {
+    if (!e.target.classList.contains('filter-btn')) return;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+    renderEvents(e.target.dataset.filter);
+});
+
+renderEvents();
+</script>
+
+</body>
+</html>
