@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>St. Cloud Elementary - Wednesday Folder</title>
+    <title>Ductan Kids - School Updates</title>
     <style>
         :root {
             --blue: #1a5276;
@@ -16,6 +16,8 @@
             --card-bg: #ffffff;
             --text: #2c3e50;
             --text-light: #7f8c8d;
+            --maya-color: #8e44ad;
+            --isaac-color: #e67e22;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -27,30 +29,60 @@
         header {
             background: linear-gradient(135deg, var(--blue), #2980b9);
             color: white;
-            padding: 24px 20px;
+            padding: 20px;
             text-align: center;
         }
-        header h1 { font-size: 1.6em; margin-bottom: 4px; }
-        header .subtitle { opacity: 0.85; font-size: 0.95em; }
+        header h1 { font-size: 1.5em; margin-bottom: 2px; }
+        header .subtitle { opacity: 0.85; font-size: 0.9em; }
         .last-updated {
             text-align: center;
-            padding: 10px;
-            font-size: 0.85em;
+            padding: 8px;
+            font-size: 0.82em;
             color: var(--text-light);
             background: #eef2f7;
         }
-        .container { max-width: 800px; margin: 0 auto; padding: 16px; }
+        .container { max-width: 850px; margin: 0 auto; padding: 16px; }
+
+        /* Tabs */
+        .tab-bar {
+            display: flex;
+            gap: 0;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 14px 16px;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.2s;
+            text-align: center;
+            background: #e8e8e8;
+            color: var(--text-light);
+        }
+        .tab-btn.maya { border-bottom: 3px solid transparent; }
+        .tab-btn.isaac { border-bottom: 3px solid transparent; }
+        .tab-btn.maya.active { background: white; color: var(--maya-color); border-bottom-color: var(--maya-color); }
+        .tab-btn.isaac.active { background: white; color: var(--isaac-color); border-bottom-color: var(--isaac-color); }
+        .tab-btn .school-name { font-size: 0.75em; font-weight: 400; display: block; color: var(--text-light); }
+        .tab-btn.active .school-name { opacity: 0.8; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
         /* Urgency sections */
         .section-header {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin: 24px 0 12px;
+            margin: 20px 0 10px;
             padding-bottom: 8px;
             border-bottom: 2px solid #ddd;
         }
-        .section-header h2 { font-size: 1.15em; }
+        .section-header h2 { font-size: 1.1em; }
         .urgency-dot {
             width: 12px; height: 12px;
             border-radius: 50%;
@@ -67,183 +99,159 @@
         .event-card {
             background: var(--card-bg);
             border-radius: 10px;
-            padding: 16px;
-            margin-bottom: 12px;
+            padding: 14px;
+            margin-bottom: 10px;
             box-shadow: 0 1px 4px rgba(0,0,0,0.08);
             border-left: 4px solid #ddd;
-            transition: transform 0.1s;
         }
-        .event-card:hover { transform: translateX(2px); }
         .event-card.today { border-left-color: var(--red); }
         .event-card.this-week { border-left-color: var(--orange); }
         .event-card.next-week { border-left-color: var(--gold); }
         .event-card.upcoming { border-left-color: var(--green); }
         .event-card.ongoing { border-left-color: var(--gray); }
-
-        .event-title { font-weight: 700; font-size: 1.05em; margin-bottom: 2px; }
-        .event-date { font-size: 0.88em; color: var(--text-light); margin-bottom: 6px; }
-        .event-details { font-size: 0.92em; }
+        .event-card.expired { opacity: 0.5; border-left-color: #ccc; }
+        .event-card.expired .event-title::after {
+            content: " (PAST)"; font-size: 0.8em; color: var(--gray); font-weight: normal;
+        }
+        .event-title { font-weight: 700; font-size: 1em; margin-bottom: 2px; }
+        .event-date { font-size: 0.85em; color: var(--text-light); margin-bottom: 4px; }
+        .event-details { font-size: 0.9em; }
+        .event-details a, .event-links a { color: var(--blue); text-decoration: underline; word-break: break-all; }
+        .event-links { margin-top: 6px; font-size: 0.88em; }
+        .event-links a { display: inline-block; margin-right: 12px; }
         .event-category {
-            display: inline-block;
-            font-size: 0.75em;
-            padding: 2px 8px;
-            border-radius: 12px;
-            background: #eef2f7;
-            color: var(--text-light);
-            margin-top: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            display: inline-block; font-size: 0.72em; padding: 2px 8px;
+            border-radius: 12px; background: #eef2f7; color: var(--text-light);
+            margin-top: 6px; text-transform: uppercase; letter-spacing: 0.5px;
         }
 
-        /* Week summary */
+        /* Summary box */
         .week-summary {
             background: linear-gradient(135deg, #eaf2f8, #ebf5fb);
             border-radius: 10px;
-            padding: 16px;
+            padding: 14px;
             margin-bottom: 8px;
-            font-size: 0.95em;
+            font-size: 0.93em;
             border: 1px solid #d4e6f1;
         }
         .week-summary strong { color: var(--blue); }
+        .week-summary.isaac-summary {
+            background: linear-gradient(135deg, #fef5e7, #fdebd0);
+            border-color: #f5cba7;
+        }
+        .week-summary.isaac-summary strong { color: var(--isaac-color); }
 
-        /* Past expired events */
-        .event-card.expired {
-            opacity: 0.5;
-            border-left-color: #ccc;
-        }
-        .event-card.expired .event-title::after {
-            content: " (PAST)";
-            font-size: 0.8em;
-            color: var(--gray);
-            font-weight: normal;
-        }
-
-        /* Archive */
-        .archive-section {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 2px solid #ddd;
-        }
-        .archive-section h2 { margin-bottom: 12px; color: var(--blue); }
-        .archive-item {
-            background: var(--card-bg);
-            border-radius: 8px;
-            margin-bottom: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-            overflow: hidden;
-        }
-        .archive-header {
-            padding: 12px 16px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .archive-header:hover { background: #f0f4f8; }
-        .archive-item .date { font-weight: 600; }
-        .archive-item .count { color: var(--text-light); font-size: 0.9em; }
-        .archive-toggle { font-size: 0.8em; color: var(--text-light); transition: transform 0.2s; }
-        .archive-item.open .archive-toggle { transform: rotate(180deg); }
-        .archive-body {
-            display: none;
-            padding: 0 16px 12px;
-            border-top: 1px solid #eee;
-        }
-        .archive-item.open .archive-body { display: block; }
-        .archive-summary {
-            font-size: 0.9em;
-            color: var(--text-light);
-            padding: 8px 0;
-            margin-bottom: 8px;
-        }
-        .archive-event {
-            padding: 8px 0;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 0.9em;
-        }
-        .archive-event:last-child { border-bottom: none; }
-        .archive-event .event-title { font-size: 0.95em; }
-        .archive-event .event-date { font-size: 0.82em; }
-        .archive-event .event-details { font-size: 0.85em; }
-
-        /* Filter tabs */
-        .filter-bar {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin: 16px 0;
-        }
+        /* Filter */
+        .filter-bar { display: flex; gap: 6px; flex-wrap: wrap; margin: 14px 0; }
         .filter-btn {
-            padding: 6px 14px;
-            border-radius: 20px;
-            border: 1px solid #ddd;
-            background: white;
-            cursor: pointer;
-            font-size: 0.85em;
-            transition: all 0.2s;
+            padding: 5px 12px; border-radius: 20px; border: 1px solid #ddd;
+            background: white; cursor: pointer; font-size: 0.82em; transition: all 0.2s;
         }
         .filter-btn:hover { border-color: var(--blue); color: var(--blue); }
         .filter-btn.active { background: var(--blue); color: white; border-color: var(--blue); }
+        .no-events { text-align: center; padding: 30px; color: var(--text-light); }
 
-        .no-events { text-align: center; padding: 40px; color: var(--text-light); }
+        /* Archive */
+        .archive-section { margin-top: 32px; padding-top: 16px; border-top: 2px solid #ddd; }
+        .archive-section h2 { margin-bottom: 10px; color: var(--blue); font-size: 1.1em; }
+        .archive-item {
+            background: var(--card-bg); border-radius: 8px;
+            margin-bottom: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); overflow: hidden;
+        }
+        .archive-header {
+            padding: 10px 14px; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .archive-header:hover { background: #f0f4f8; }
+        .archive-item .date { font-weight: 600; font-size: 0.95em; }
+        .archive-item .count { color: var(--text-light); font-size: 0.85em; }
+        .archive-toggle { font-size: 0.75em; color: var(--text-light); transition: transform 0.2s; }
+        .archive-item.open .archive-toggle { transform: rotate(180deg); }
+        .archive-body { display: none; padding: 0 14px 10px; border-top: 1px solid #eee; }
+        .archive-item.open .archive-body { display: block; }
+        .archive-summary { font-size: 0.88em; color: var(--text-light); padding: 8px 0; margin-bottom: 6px; }
+        .archive-event { padding: 6px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.88em; }
+        .archive-event:last-child { border-bottom: none; }
 
-        .event-details a, .event-links a {
-            color: var(--blue);
-            text-decoration: underline;
-            word-break: break-all;
+        /* SOCDS newsletter cards */
+        .newsletter-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--isaac-color);
         }
-        .event-details a:hover, .event-links a:hover {
-            color: #2980b9;
+        .newsletter-card h3 { font-size: 1em; margin-bottom: 4px; color: var(--isaac-color); }
+        .newsletter-text { font-size: 0.9em; white-space: pre-line; line-height: 1.6; }
+        .newsletter-text p { margin-bottom: 10px; }
+        .newsletter-links { margin-top: 10px; }
+        .newsletter-links a {
+            display: inline-block; margin-right: 12px; margin-bottom: 4px;
+            color: var(--blue); text-decoration: underline; font-size: 0.88em;
         }
-        .event-links {
-            margin-top: 8px;
-            font-size: 0.9em;
-        }
-        .event-links a {
-            display: inline-block;
-            margin-right: 14px;
-            padding: 3px 0;
-        }
+        .newsletter-meta { font-size: 0.82em; color: var(--text-light); margin-bottom: 8px; }
 
         @media (max-width: 600px) {
-            header h1 { font-size: 1.3em; }
+            header h1 { font-size: 1.2em; }
             .container { padding: 10px; }
-            .event-card { padding: 12px; }
+            .tab-btn { padding: 10px 8px; font-size: 0.9em; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>St. Cloud Elementary - Wednesday Folder</h1>
-    <div class="subtitle">Jaguars PTA Updates & Events</div>
+    <h1>Ductan Kids - School Updates</h1>
+    <div class="subtitle">Maya & Isaac's weekly school newsletters</div>
 </header>
 <div class="last-updated" id="lastUpdated"></div>
 
 <div class="container">
-    <div class="week-summary" id="weekSummary"></div>
-
-    <div class="filter-bar" id="filterBar">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="action-needed">Action Needed</button>
-        <button class="filter-btn" data-filter="school-event">School Events</button>
-        <button class="filter-btn" data-filter="community-event">Community</button>
-        <button class="filter-btn" data-filter="fundraiser">Fundraiser</button>
-        <button class="filter-btn" data-filter="deadline">Deadlines</button>
-        <button class="filter-btn" data-filter="volunteer">Volunteer</button>
+    <div class="tab-bar">
+        <button class="tab-btn maya active" onclick="switchTab('maya')">
+            Maya (K)
+            <span class="school-name">St. Cloud Elementary</span>
+        </button>
+        <button class="tab-btn isaac" onclick="switchTab('isaac')">
+            Isaac (PreK)
+            <span class="school-name">SOCDS</span>
+        </button>
     </div>
 
-    <div id="eventsContainer"></div>
+    <!-- MAYA TAB -->
+    <div class="tab-content active" id="tab-maya">
+        <div class="week-summary" id="mayaSummary"></div>
+        <div class="filter-bar" id="mayaFilterBar">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="action-needed">Action Needed</button>
+            <button class="filter-btn" data-filter="school-event">School Events</button>
+            <button class="filter-btn" data-filter="community-event">Community</button>
+            <button class="filter-btn" data-filter="fundraiser">Fundraiser</button>
+            <button class="filter-btn" data-filter="deadline">Deadlines</button>
+            <button class="filter-btn" data-filter="volunteer">Volunteer</button>
+        </div>
+        <div id="mayaEvents"></div>
+        <div class="archive-section" id="mayaArchive">
+            <h2>Past Weeks</h2>
+            <div id="mayaArchiveList"></div>
+        </div>
+    </div>
 
-    <div class="archive-section" id="archiveSection">
-        <h2>Past Weeks</h2>
-        <div id="archiveList"></div>
+    <!-- ISAAC TAB -->
+    <div class="tab-content" id="tab-isaac">
+        <div class="week-summary isaac-summary" id="isaacSummary"></div>
+        <div id="isaacCurrent"></div>
+        <div class="archive-section" id="isaacArchive">
+            <h2>Past Weeks</h2>
+            <div id="isaacArchiveList"></div>
+        </div>
     </div>
 </div>
 
 <script>
-// Events data - embedded directly for GitHub Pages (no server needed)
-const DATA = EVENTS_DATA_PLACEHOLDER;
+const MAYA_DATA = MAYA_DATA_PLACEHOLDER;
+const ISAAC_DATA = ISAAC_DATA_PLACEHOLDER;
 
 const today = new Date().toISOString().split('T')[0];
 
@@ -255,13 +263,7 @@ function linkify(text) {
 }
 
 const urgencyOrder = { 'today': 0, 'this-week': 1, 'next-week': 2, 'upcoming': 3, 'ongoing': 4 };
-const urgencyLabels = {
-    'today': 'Today',
-    'this-week': 'This Week',
-    'next-week': 'Next Week',
-    'upcoming': 'Coming Up',
-    'ongoing': 'Ongoing'
-};
+const urgencyLabels = { 'today': 'Today', 'this-week': 'This Week', 'next-week': 'Next Week', 'upcoming': 'Coming Up', 'ongoing': 'Ongoing' };
 
 function getUrgency(event) {
     const eventDate = event.date || event.date_start;
@@ -269,13 +271,10 @@ function getUrgency(event) {
     if (!eventDate) return 'ongoing';
     if (eventEnd && eventEnd < today) return 'expired';
     if (eventDate === today) return 'today';
-
     const todayDate = new Date(today);
     const evDate = new Date(eventDate);
     const diffDays = Math.ceil((evDate - todayDate) / (1000 * 60 * 60 * 24));
-
     if (diffDays < 0) {
-        // Event started in past but may still be ongoing
         if (eventEnd && eventEnd >= today) return 'this-week';
         return 'expired';
     }
@@ -284,121 +283,126 @@ function getUrgency(event) {
     return 'upcoming';
 }
 
-function renderEvents(filter = 'all') {
-    const container = document.getElementById('eventsContainer');
-    const latestWeek = DATA.weeks[0];
-    if (!latestWeek) {
-        container.innerHTML = '<div class="no-events">No events yet. Check back after the next Wednesday Folder!</div>';
-        return;
-    }
+function renderMayaEvents(filter = 'all') {
+    const latestWeek = MAYA_DATA.weeks[0];
+    if (!latestWeek) return;
 
-    // Update header info
     document.getElementById('lastUpdated').textContent =
-        `Last updated: ${new Date(DATA.last_updated).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`;
-    document.getElementById('weekSummary').innerHTML =
-        `<strong>This Week's Highlights:</strong> ${latestWeek.summary}`;
+        `Last updated: ${new Date(MAYA_DATA.last_updated + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`;
+    document.getElementById('mayaSummary').innerHTML =
+        `<strong>Latest (${new Date(latestWeek.folder_date + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}):</strong> ${latestWeek.summary}`;
 
-    // Recalculate urgency dynamically
-    let events = latestWeek.events.map(e => ({
-        ...e,
-        _urgency: getUrgency(e)
-    }));
+    let events = latestWeek.events.map(e => ({ ...e, _urgency: getUrgency(e) }));
+    if (filter === 'action-needed') events = events.filter(e => ['today', 'this-week', 'next-week'].includes(e._urgency));
+    else if (filter !== 'all') events = events.filter(e => e.category === filter);
+    events.sort((a, b) => (urgencyOrder[a._urgency] ?? 5) - (urgencyOrder[b._urgency] ?? 5));
 
-    // Filter
-    if (filter === 'action-needed') {
-        events = events.filter(e => ['today', 'this-week', 'next-week'].includes(e._urgency));
-    } else if (filter !== 'all') {
-        events = events.filter(e => e.category === filter);
-    }
-
-    // Sort by urgency
-    events.sort((a, b) => {
-        const ua = urgencyOrder[a._urgency] ?? 5;
-        const ub = urgencyOrder[b._urgency] ?? 5;
-        return ua - ub;
-    });
-
-    // Group by urgency
     const groups = {};
-    events.forEach(e => {
-        const u = e._urgency;
-        if (!groups[u]) groups[u] = [];
-        groups[u].push(e);
-    });
+    events.forEach(e => { const u = e._urgency; if (!groups[u]) groups[u] = []; groups[u].push(e); });
 
     let html = '';
-    const order = ['today', 'this-week', 'next-week', 'upcoming', 'ongoing', 'expired'];
-    order.forEach(urgency => {
+    ['today', 'this-week', 'next-week', 'upcoming', 'ongoing', 'expired'].forEach(urgency => {
         if (!groups[urgency]) return;
-        const label = urgencyLabels[urgency] || 'Past';
-        html += `
-            <div class="section-header">
-                <span class="urgency-dot ${urgency}"></span>
-                <h2>${label}</h2>
-            </div>`;
+        html += `<div class="section-header"><span class="urgency-dot ${urgency}"></span><h2>${urgencyLabels[urgency] || 'Past'}</h2></div>`;
         groups[urgency].forEach(e => {
             const linksHtml = (e.links && e.links.length)
-                ? `<div class="event-links">${e.links.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join(' ')}</div>`
-                : '';
-            html += `
-                <div class="event-card ${urgency}">
-                    <div class="event-title">${e.title}</div>
-                    <div class="event-date">${e.date_display}</div>
-                    <div class="event-details">${linkify(e.details)}</div>
-                    ${linksHtml}
-                    <span class="event-category">${e.category.replace('-', ' ')}</span>
-                </div>`;
+                ? `<div class="event-links">${e.links.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join(' ')}</div>` : '';
+            html += `<div class="event-card ${urgency}">
+                <div class="event-title">${e.title}</div>
+                <div class="event-date">${e.date_display}</div>
+                <div class="event-details">${linkify(e.details)}</div>
+                ${linksHtml}
+                <span class="event-category">${e.category.replace('-', ' ')}</span>
+            </div>`;
         });
     });
-
-    if (!html) {
-        html = '<div class="no-events">No events match this filter.</div>';
-    }
-
-    container.innerHTML = html;
+    if (!html) html = '<div class="no-events">No events match this filter.</div>';
+    document.getElementById('mayaEvents').innerHTML = html;
 
     // Archive
-    const archiveList = document.getElementById('archiveList');
-    if (DATA.weeks.length > 1) {
-        archiveList.innerHTML = DATA.weeks.slice(1).map((w, idx) => {
+    const archiveList = document.getElementById('mayaArchiveList');
+    if (MAYA_DATA.weeks.length > 1) {
+        archiveList.innerHTML = MAYA_DATA.weeks.slice(1).map((w, idx) => {
             const dateStr = new Date(w.folder_date + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
             const eventsHtml = w.events.map(e => {
-                const linksHtml = (e.links && e.links.length)
-                    ? ` ${e.links.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join(' ')}`
-                    : '';
-                return `<div class="archive-event">
-                    <div class="event-title">${e.title}</div>
-                    <div class="event-date">${e.date_display}</div>
-                    <div class="event-details">${linkify(e.details)}${linksHtml}</div>
-                </div>`;
+                const lh = (e.links && e.links.length) ? ` ${e.links.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join(' ')}` : '';
+                return `<div class="archive-event"><div class="event-title">${e.title}</div><div class="event-date">${e.date_display}</div><div class="event-details">${linkify(e.details)}${lh}</div></div>`;
             }).join('');
-            return `<div class="archive-item" id="archive-${idx}">
-                <div class="archive-header" onclick="this.parentElement.classList.toggle('open')">
-                    <div><span class="date">${dateStr}</span> <span class="count">(${w.events.length} items)</span></div>
-                    <span class="archive-toggle">&#9660;</span>
-                </div>
-                <div class="archive-body">
-                    <div class="archive-summary">${w.summary}</div>
-                    ${eventsHtml}
-                </div>
-            </div>`;
+            return `<div class="archive-item"><div class="archive-header" onclick="this.parentElement.classList.toggle('open')"><div><span class="date">${dateStr}</span> <span class="count">(${w.events.length} items)</span></div><span class="archive-toggle">&#9660;</span></div><div class="archive-body"><div class="archive-summary">${w.summary}</div>${eventsHtml}</div></div>`;
         }).join('');
-        document.getElementById('archiveSection').style.display = 'block';
+        document.getElementById('mayaArchive').style.display = 'block';
     } else {
-        document.getElementById('archiveSection').style.display = 'none';
+        document.getElementById('mayaArchive').style.display = 'none';
     }
 }
 
-// Filter buttons
-document.getElementById('filterBar').addEventListener('click', e => {
+function formatNewsletterText(raw) {
+    // Clean up the raw text: remove the email/unsubscribe footer, format paragraphs
+    let text = raw;
+    // Remove footer
+    const cutoffs = ['You are receiving this email', 'Unsubscribe', 'If you no longer wish'];
+    for (const c of cutoffs) {
+        const idx = text.indexOf(c);
+        if (idx > 0) text = text.substring(0, idx).trim();
+    }
+    // Remove "Email Ms. Annemarie" header
+    text = text.replace(/^Email Ms\.\s*Annemarie\s*/i, '');
+    // Convert line breaks into paragraphs
+    const paragraphs = text.split(/\n{2,}/).map(p => p.trim()).filter(p => p);
+    return paragraphs.map(p => `<p>${linkify(p.replace(/\n/g, '<br>'))}</p>`).join('');
+}
+
+function renderIsaacContent() {
+    if (!ISAAC_DATA.weeks || !ISAAC_DATA.weeks.length) return;
+    const latest = ISAAC_DATA.weeks[0];
+
+    document.getElementById('isaacSummary').innerHTML =
+        `<strong>Week #${latest.week_number} (${new Date(latest.date + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}):</strong> ${latest.subject.replace(/SOCDS 2025\/26 Update Week #\d+ - /, '')}`;
+
+    const linksHtml = (latest.links && latest.links.length)
+        ? `<div class="newsletter-links">${latest.links.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.label || l.url}</a>`).join('')}</div>` : '';
+
+    document.getElementById('isaacCurrent').innerHTML = `
+        <div class="newsletter-card">
+            <div class="newsletter-meta">Week #${latest.week_number} - ${latest.subject.replace(/SOCDS 2025\/26 Update Week #\d+ - /, '')}</div>
+            <div class="newsletter-text">${formatNewsletterText(latest.text)}</div>
+            ${linksHtml}
+        </div>`;
+
+    // Archive
+    const archiveList = document.getElementById('isaacArchiveList');
+    if (ISAAC_DATA.weeks.length > 1) {
+        archiveList.innerHTML = ISAAC_DATA.weeks.slice(1).map((w, idx) => {
+            const dateStr = new Date(w.date + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+            const className = w.subject.replace(/SOCDS 2025\/26 Update Week #\d+ - /, '');
+            const lh = (w.links && w.links.length) ? `<div class="newsletter-links">${w.links.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.label || l.url}</a>`).join('')}</div>` : '';
+            return `<div class="archive-item"><div class="archive-header" onclick="this.parentElement.classList.toggle('open')"><div><span class="date">Week #${w.week_number} - ${dateStr}</span> <span class="count">${className}</span></div><span class="archive-toggle">&#9660;</span></div><div class="archive-body"><div class="newsletter-text" style="font-size:0.88em">${formatNewsletterText(w.text)}</div>${lh}</div></div>`;
+        }).join('');
+        document.getElementById('isaacArchive').style.display = 'block';
+    } else {
+        document.getElementById('isaacArchive').style.display = 'none';
+    }
+}
+
+// Tab switching
+function switchTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelector(`.tab-btn.${tab}`).classList.add('active');
+    document.getElementById(`tab-${tab}`).classList.add('active');
+}
+
+// Maya filter buttons
+document.getElementById('mayaFilterBar').addEventListener('click', e => {
     if (!e.target.classList.contains('filter-btn')) return;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('#mayaFilterBar .filter-btn').forEach(b => b.classList.remove('active'));
     e.target.classList.add('active');
-    renderEvents(e.target.dataset.filter);
+    renderMayaEvents(e.target.dataset.filter);
 });
 
-renderEvents();
+// Initialize
+renderMayaEvents();
+renderIsaacContent();
 </script>
-
 </body>
 </html>

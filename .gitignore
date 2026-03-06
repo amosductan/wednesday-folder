@@ -5,5 +5,7 @@ credentials/
 data/*_email.html
 data/*_debug_page.html
 data/fetch_state.json
+data/socds_sample.html
 pdfs/
 logs/
+socds/emails/
