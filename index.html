@@ -173,7 +173,7 @@
         .archive-event { padding: 6px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.88em; }
         .archive-event:last-child { border-bottom: none; }
 
-        /* SOCDS newsletter cards */
+        /* SOCDS newsletter sections */
         .newsletter-card {
             background: var(--card-bg);
             border-radius: 10px;
@@ -191,6 +191,52 @@
             color: var(--blue); text-decoration: underline; font-size: 0.88em;
         }
         .newsletter-meta { font-size: 0.82em; color: var(--text-light); margin-bottom: 8px; }
+
+        /* Isaac structured sections */
+        .isaac-section {
+            margin-bottom: 16px;
+        }
+        .isaac-section-header {
+            display: flex; align-items: center; gap: 8px;
+            padding: 8px 0; margin-bottom: 8px;
+            border-bottom: 2px solid #f5cba7;
+            font-weight: 700; font-size: 1em; color: var(--isaac-color);
+        }
+        .isaac-section-header .section-icon { font-size: 1.1em; }
+        .announcement-block {
+            background: var(--card-bg); border-radius: 8px;
+            padding: 12px 14px; margin-bottom: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            border-left: 3px solid var(--isaac-color);
+        }
+        .announcement-block .ann-title {
+            font-weight: 700; font-size: 0.95em; margin-bottom: 4px; color: var(--text);
+        }
+        .announcement-block .ann-body { font-size: 0.9em; line-height: 1.6; white-space: pre-line; }
+        .special-section {
+            background: var(--card-bg); border-radius: 8px;
+            padding: 12px 14px; margin-bottom: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            font-size: 0.9em; line-height: 1.6; white-space: pre-line;
+        }
+        .special-section.art { border-left: 3px solid #8e44ad; }
+        .special-section.gardening { border-left: 3px solid #27ae60; }
+        .special-section.logistics { border-left: 3px solid #95a5a6; }
+        .upcoming-list { list-style: none; padding: 0; }
+        .upcoming-list li {
+            background: var(--card-bg); border-radius: 8px;
+            padding: 8px 12px; margin-bottom: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            font-size: 0.9em;
+            border-left: 3px solid var(--gold);
+        }
+        .logistics-toggle {
+            cursor: pointer; color: var(--text-light); font-size: 0.82em;
+            padding: 4px 0; user-select: none;
+        }
+        .logistics-toggle:hover { color: var(--text); }
+        .logistics-body { display: none; }
+        .logistics-body.open { display: block; }
 
         @media (max-width: 600px) {
             header h1 { font-size: 1.2em; }
@@ -336,20 +382,70 @@ function renderMayaEvents(filter = 'all') {
     }
 }
 
-function formatNewsletterText(raw) {
-    // Clean up the raw text: remove the email/unsubscribe footer, format paragraphs
-    let text = raw;
-    // Remove footer
-    const cutoffs = ['You are receiving this email', 'Unsubscribe', 'If you no longer wish'];
-    for (const c of cutoffs) {
-        const idx = text.indexOf(c);
-        if (idx > 0) text = text.substring(0, idx).trim();
+function renderIsaacSections(sections, links) {
+    let html = '';
+
+    // Announcements
+    if (sections.announcements && sections.announcements.length) {
+        html += '<div class="isaac-section">';
+        html += '<div class="isaac-section-header"><span class="section-icon">&#128227;</span> Announcements</div>';
+        sections.announcements.forEach(a => {
+            const title = a.title ? `<div class="ann-title">${linkify(a.title)}</div>` : '';
+            const body = a.body ? `<div class="ann-body">${linkify(a.body)}</div>` : '';
+            html += `<div class="announcement-block">${title}${body}</div>`;
+        });
+        html += '</div>';
     }
-    // Remove "Email Ms. Annemarie" header
-    text = text.replace(/^Email Ms\.\s*Annemarie\s*/i, '');
-    // Convert line breaks into paragraphs
-    const paragraphs = text.split(/\n{2,}/).map(p => p.trim()).filter(p => p);
-    return paragraphs.map(p => `<p>${linkify(p.replace(/\n/g, '<br>'))}</p>`).join('');
+
+    // Art with Ms. Jenny
+    if (sections.art) {
+        html += '<div class="isaac-section">';
+        html += '<div class="isaac-section-header"><span class="section-icon">&#127912;</span> Art with Ms. Jenny</div>';
+        html += `<div class="special-section art">${linkify(sections.art)}</div>`;
+        html += '</div>';
+    }
+
+    // Gardening with Ms. Linda
+    if (sections.gardening) {
+        html += '<div class="isaac-section">';
+        html += '<div class="isaac-section-header"><span class="section-icon">&#127793;</span> Gardening with Ms. Linda</div>';
+        html += `<div class="special-section gardening">${linkify(sections.gardening)}</div>`;
+        html += '</div>';
+    }
+
+    // Upcoming
+    if (sections.upcoming && sections.upcoming.length) {
+        html += '<div class="isaac-section">';
+        html += '<div class="isaac-section-header"><span class="section-icon">&#128197;</span> Upcoming Dates</div>';
+        html += '<ul class="upcoming-list">';
+        sections.upcoming.forEach(ev => {
+            html += `<li>${linkify(ev)}</li>`;
+        });
+        html += '</ul></div>';
+    }
+
+    // Logistics (collapsible)
+    if (sections.logistics) {
+        const logId = 'log_' + Math.random().toString(36).substr(2, 6);
+        html += '<div class="isaac-section">';
+        html += `<div class="isaac-section-header"><span class="section-icon">&#128666;</span> Logistics <span class="logistics-toggle" onclick="document.getElementById('${logId}').classList.toggle('open')">[show/hide]</span></div>`;
+        html += `<div class="special-section logistics logistics-body" id="${logId}">${linkify(sections.logistics)}</div>`;
+        html += '</div>';
+    }
+
+    // Links
+    if (links && links.length) {
+        const filtered = links.filter(l => l.label !== 'Unsubscribe');
+        if (filtered.length) {
+            html += '<div class="newsletter-links">';
+            filtered.forEach(l => {
+                html += `<a href="${l.url}" target="_blank" rel="noopener">${l.label || l.url}</a>`;
+            });
+            html += '</div>';
+        }
+    }
+
+    return html;
 }
 
 function renderIsaacContent() {
@@ -359,24 +455,19 @@ function renderIsaacContent() {
     document.getElementById('isaacSummary').innerHTML =
         `<strong>Week #${latest.week_number} (${new Date(latest.date + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}):</strong> ${latest.subject.replace(/SOCDS 2025\/26 Update Week #\d+ - /, '')}`;
 
-    const linksHtml = (latest.links && latest.links.length)
-        ? `<div class="newsletter-links">${latest.links.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.label || l.url}</a>`).join('')}</div>` : '';
-
     document.getElementById('isaacCurrent').innerHTML = `
         <div class="newsletter-card">
             <div class="newsletter-meta">Week #${latest.week_number} - ${latest.subject.replace(/SOCDS 2025\/26 Update Week #\d+ - /, '')}</div>
-            <div class="newsletter-text">${formatNewsletterText(latest.text)}</div>
-            ${linksHtml}
+            ${renderIsaacSections(latest.sections, latest.links)}
         </div>`;
 
     // Archive
     const archiveList = document.getElementById('isaacArchiveList');
     if (ISAAC_DATA.weeks.length > 1) {
-        archiveList.innerHTML = ISAAC_DATA.weeks.slice(1).map((w, idx) => {
+        archiveList.innerHTML = ISAAC_DATA.weeks.slice(1).map((w) => {
             const dateStr = new Date(w.date + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
             const className = w.subject.replace(/SOCDS 2025\/26 Update Week #\d+ - /, '');
-            const lh = (w.links && w.links.length) ? `<div class="newsletter-links">${w.links.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.label || l.url}</a>`).join('')}</div>` : '';
-            return `<div class="archive-item"><div class="archive-header" onclick="this.parentElement.classList.toggle('open')"><div><span class="date">Week #${w.week_number} - ${dateStr}</span> <span class="count">${className}</span></div><span class="archive-toggle">&#9660;</span></div><div class="archive-body"><div class="newsletter-text" style="font-size:0.88em">${formatNewsletterText(w.text)}</div>${lh}</div></div>`;
+            return `<div class="archive-item"><div class="archive-header" onclick="this.parentElement.classList.toggle('open')"><div><span class="date">Week #${w.week_number} - ${dateStr}</span> <span class="count">${className}</span></div><span class="archive-toggle">&#9660;</span></div><div class="archive-body" style="font-size:0.92em">${renderIsaacSections(w.sections, w.links)}</div></div>`;
         }).join('');
         document.getElementById('isaacArchive').style.display = 'block';
     } else {

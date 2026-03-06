@@ -14,20 +14,11 @@ events_path = script_dir / "data" / "events.json"
 with open(events_path, 'r', encoding='utf-8') as f:
     maya_data = json.load(f)
 
-# Isaac data (SOCDS newsletters)
-socds_data_dir = script_dir / "socds" / "data"
-isaac_weeks = []
-if socds_data_dir.exists():
-    for f in sorted(socds_data_dir.glob("week_*.json"), reverse=True):
-        with open(f, 'r', encoding='utf-8') as fh:
-            isaac_weeks.append(json.load(fh))
-
-isaac_data = {
-    "school": "South Orange Country Day School",
-    "class": "PreK Orange",
-    "last_updated": isaac_weeks[0]["date"] if isaac_weeks else "",
-    "weeks": isaac_weeks
-}
+# Isaac data (SOCDS structured newsletters)
+from parse_socds import build_socds_events
+socds_events_path = build_socds_events()
+with open(socds_events_path, 'r', encoding='utf-8') as f:
+    isaac_data = json.load(f)
 
 # Read template
 template_path = script_dir / "index.html"
@@ -49,4 +40,4 @@ with open(output_path, 'w', encoding='utf-8') as f:
 maya_events = sum(len(w['events']) for w in maya_data['weeks'])
 print(f"Built site: {output_path}")
 print(f"Maya (St. Cloud): {maya_events} events across {len(maya_data['weeks'])} weeks")
-print(f"Isaac (SOCDS): {len(isaac_weeks)} weekly newsletters")
+print(f"Isaac (SOCDS): {len(isaac_data['weeks'])} weekly newsletters")
