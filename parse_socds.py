@@ -109,71 +109,93 @@ def _clean_paragraph(text):
 
 
 def _clean_announcements(text):
-    """Parse the main announcements into titled blocks using bold/heading detection."""
+    """Parse the main announcements into titled blocks.
+
+    Strategy: look ahead — a line is only a heading if it's short, capitalized,
+    and the NEXT non-empty line is a long sentence (>60 chars). This prevents
+    names, dates, and list items from being treated as headings.
+    """
     if not text:
         return []
 
-    lines = text.split('\n')
+    lines = [l.strip() for l in text.split('\n')]
+    # Remove trailing signature lines
+    while lines and lines[-1].lower() in ('annemarie', 'ms. annemarie', ''):
+        lines.pop()
+
+    def _is_sentence(s):
+        """A line that looks like prose, not a name or label."""
+        return len(s) > 60 or s.endswith('.') or s.endswith('!') or s.endswith('?')
+
+    def _next_nonblank(idx):
+        """Return the next non-blank line after idx, or None."""
+        for j in range(idx + 1, len(lines)):
+            if lines[j]:
+                return lines[j]
+        return None
+
+    def _is_heading(line, idx):
+        """True if line looks like a topic heading."""
+        if not line or len(line) > 50:
+            return False
+        if not line[0].isupper():
+            return False
+        if line.endswith('.') or line.endswith(',') or line.endswith('!') or line.endswith('?'):
+            return False
+        # Date lines are not headings
+        if re.match(r'^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)', line):
+            return False
+        if ' - ' in line:
+            return False
+        # Must be followed by a sentence-like line (not another short name/label)
+        nxt = _next_nonblank(idx)
+        if nxt and _is_sentence(nxt):
+            return True
+        return False
+
     blocks = []
     current_title = None
     current_body_lines = []
 
-    for line in lines:
-        stripped = line.strip()
-        if not stripped:
+    for i, line in enumerate(lines):
+        if not line:
             if current_body_lines:
                 current_body_lines.append('')
             continue
 
-        # Heuristic for headings: short, no ending punctuation, standalone
-        looks_like_heading = (
-            len(stripped) < 55
-            and not stripped.endswith('.')
-            and not stripped.endswith(',')
-            and not stripped.endswith(':')
-            and not stripped.startswith('If you')
-            and not stripped.startswith('Please')
-            and not stripped.startswith('We ')
-            and not stripped.startswith('I ')
-            and not stripped.startswith('In ')
-            and not stripped.startswith('A ')
-            and not stripped.startswith('To ')
-            and not stripped.startswith('On ')
-            and not stripped.startswith('For ')
-            and not stripped.startswith('The ')
-            and not stripped.startswith('Our ')
-            and not stripped.startswith('(')
-            and not stripped.startswith('"')
-            and stripped[0].isupper()
-        )
-
-        if looks_like_heading and current_body_lines:
+        if _is_heading(line, i) and (current_body_lines or current_title):
             # Save previous block
             body = _join_body(current_body_lines)
             if body or current_title:
                 blocks.append({"title": current_title or "", "body": body})
-            current_title = stripped
+            current_title = line
             current_body_lines = []
-        elif looks_like_heading and not current_title:
-            current_title = stripped
+        elif _is_heading(line, i) and not current_title:
+            current_title = line
         else:
-            current_body_lines.append(stripped)
+            current_body_lines.append(line)
 
     # Save last block
     body = _join_body(current_body_lines)
     if body or current_title:
         blocks.append({"title": current_title or "", "body": body})
 
-    # Merge tiny orphan blocks (body < 30 chars) into previous block
+    # Merge orphan blocks: no title + short body → prepend to next block's body
     merged = []
     for b in blocks:
-        if merged and len(b['body']) < 30 and not b['title']:
-            merged[-1]['body'] += ' ' + b['body']
-        elif merged and not b['body'] and b['title'] and len(b['title']) < 20:
-            # Orphan title with no body — append as subtitle to previous
-            merged[-1]['body'] += ' ' + b['title']
-        else:
+        if merged and not b['title'] and len(b['body']) < 60:
+            # Orphan — attach to previous block
+            merged[-1]['body'] = (merged[-1]['body'] + '\n' + b['body']).strip()
+        elif not merged and not b['title'] and len(b['body']) < 60:
+            # First block is an orphan — will become next block's prefix
             merged.append(b)
+        else:
+            if merged and not merged[-1]['title'] and merged[-1]['body']:
+                # Previous was an untitled orphan — make it a subtitle of this block
+                b['title'] = merged[-1]['body'] + ' - ' + b['title'] if b['title'] else merged[-1]['body']
+                merged[-1] = b
+            else:
+                merged.append(b)
 
     return merged
 

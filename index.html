@@ -334,7 +334,7 @@ function renderMayaEvents(filter = 'all') {
     if (!latestWeek) return;
 
     document.getElementById('lastUpdated').textContent =
-        `Last updated: ${new Date(MAYA_DATA.last_updated + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`;
+        `Last updated: ${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`;
     document.getElementById('mayaSummary').innerHTML =
         `<strong>Latest (${new Date(latestWeek.folder_date + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}):</strong> ${latestWeek.summary}`;
 
