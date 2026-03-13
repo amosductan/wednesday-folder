@@ -1,8 +1,83 @@
 {
   "school": "St. Cloud Elementary School",
   "mascot": "Jaguars",
-  "last_updated": "2026-03-05",
+  "last_updated": "2026-03-13",
   "weeks": [
+    {
+      "folder_date": "2026-03-11",
+      "pdf_file": "2026-03-11_wednesday_folder.pdf",
+      "summary": "PTA meeting tonight with Liberty & Roosevelt principals on middle school transitions, Ice Skating Night this Friday Mar 13 at Codey Arena, Career Week Mar 17-20 (now with ABA signup link).",
+      "events": [
+        {
+          "title": "PTA General Meeting - Middle School Transitions",
+          "date": "2026-03-11",
+          "date_display": "Wednesday, March 11",
+          "category": "meeting",
+          "details": "8:00-9:00 PM ET via Zoom. Special guests: Liberty & Roosevelt principals discussing middle school transitions. Meeting ID: 850 0565 5035, Password: 130895.",
+          "links": []
+        },
+        {
+          "title": "Family Ice Skating Night",
+          "date": "2026-03-13",
+          "date_display": "Friday, March 13",
+          "category": "community-event",
+          "details": "$5 per person at Codey Arena, 560 Northfield Avenue, 6:30-8:00 PM. Free skate rentals for PTA members. Volunteers needed.",
+          "links": [
+            {
+              "label": "Register / Volunteer",
+              "url": "https://bit.ly/stcloudskate26"
+            }
+          ]
+        },
+        {
+          "title": "Career Week",
+          "date_start": "2026-03-17",
+          "date_end": "2026-03-20",
+          "date_display": "March 17-20",
+          "category": "school-event",
+          "details": "Sign up to participate or volunteer for Career Week. Separate ABA sign-up available.",
+          "links": [
+            {
+              "label": "Sign Up",
+              "url": "https://tinyurl.com/StCloudCareerWeek"
+            },
+            {
+              "label": "ABA Sign Up",
+              "url": "https://tinyurl.com/StCloudCareerWeekABA"
+            }
+          ]
+        },
+        {
+          "title": "Diversity Council - Heritage Month Contributions",
+          "date": null,
+          "date_display": "Ongoing",
+          "category": "volunteer",
+          "details": "Seeking families with info to share for Women's History Month, Black History Month, Lunar New Year. Contact diversitycouncilstc@gmail.com",
+          "links": []
+        },
+        {
+          "title": "PTA Matching Gifts via Benevity",
+          "date": null,
+          "date_display": "Ongoing",
+          "category": "fundraiser",
+          "details": "PTA accepts matching gifts through Benevity. PTA TIN: 51-0224833",
+          "links": []
+        },
+        {
+          "title": "PTA Membership",
+          "date": null,
+          "date_display": "2025-26 School Year",
+          "category": "membership",
+          "details": "$15 membership. Email membership@stcloudpta.org",
+          "links": [
+            {
+              "label": "Join the PTA",
+              "url": "https://stcloudpta.givebacks.com/shop"
+            }
+          ]
+        }
+      ]
+    },
     {
       "folder_date": "2026-03-04",
       "pdf_file": "2026-03-04_wednesday_folder.pdf",
