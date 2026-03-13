@@ -311,8 +311,8 @@ def process_single_email(msg, service, dry_run=False):
     # Check if we already have this PDF
     existing_pdf = PDF_DIR / f"{folder_date}_wednesday_folder.pdf"
     if existing_pdf.exists():
-        print(f"  SKIP: PDF already exists")
-        return None
+        print(f"  SKIP: PDF already exists at {existing_pdf}")
+        return str(existing_pdf)  # Return existing path (not None) so pipeline knows
 
     # Extract HTML body and find link
     html = extract_body_html(msg)
@@ -417,7 +417,7 @@ def main():
         save_state(state)
 
         print(f"\nPDF downloaded and saved successfully!")
-        print(f"  python process_pdf.py \"{pdf_path}\" --date {folder_date}")
+        # Note: process_pdf.py and auto_curate.py are called by weekly_pipeline.py
 
 
 if __name__ == "__main__":
