@@ -1,8 +1,58 @@
 {
   "school": "St. Cloud Elementary School",
   "mascot": "Jaguars",
-  "last_updated": "2026-03-13",
+  "last_updated": "2026-03-27",
   "weeks": [
+    {
+      "folder_date": "2026-03-25",
+      "pdf_file": "2026-03-25_wednesday_folder.pdf",
+      "summary": "PTA General Meeting, FRIDAY, APRIL 10TH.",
+      "events": [
+        {
+          "title": "PTA General Meeting",
+          "category": "meeting",
+          "details": "SAVE THE DATE for our April PTA General Meeting ! Wednesday, April 8th 7:00-8:00 PM ET via Zoom Link to follow in next Wednesday Folder and PTA emails We look forward to seeing you there! ELA Curriculum with Beatrice Hanratty, Elementary ELA Supervisor",
+          "links": [],
+          "date": "2026-04-08",
+          "date_display": "Wednesday, April 8th"
+        },
+        {
+          "title": "FRIDAY, APRIL 10TH",
+          "category": "school-event",
+          "details": "FRIDAY, APRIL 10TH 6:15-8:15 PM WEST ORANGE HIGH SCHOOL CAFETERIAST. CLOUD PTA WELCOMES YOU TO Join us and enjoy a night of interactive and fun science experiments! All children MUST have a caregiver with them, as this event is meant to engage families together in fun STEM experiences. SCIENCE SC...",
+          "links": [
+            {
+              "label": "More Info",
+              "url": "https://bit.ly/stcloudstemfest26"
+            }
+          ],
+          "date": "2026-04-10",
+          "date_display": "FRIDAY, APRIL 10TH"
+        },
+        {
+          "title": "PTA Matching Gifts via Benevity",
+          "date": null,
+          "date_display": "Ongoing",
+          "category": "fundraiser",
+          "details": "PTA accepts matching gifts through Benevity. PTA TIN: 51-0224833",
+          "links": []
+        },
+        {
+          "title": "PTA Membership",
+          "date": null,
+          "date_display": "2025-26 School Year",
+          "category": "membership",
+          "details": "$15 membership. Email membership@stcloudpta.org",
+          "links": [
+            {
+              "label": "Join the PTA",
+              "url": "https://stcloudpta.givebacks.com/shop"
+            }
+          ]
+        }
+      ],
+      "auto_curated": true
+    },
     {
       "folder_date": "2026-03-11",
       "pdf_file": "2026-03-11_wednesday_folder.pdf",
