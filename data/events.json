@@ -1,8 +1,45 @@
 {
   "school": "St. Cloud Elementary School",
   "mascot": "Jaguars",
-  "last_updated": "2026-03-27",
+  "last_updated": "2026-04-15",
   "weeks": [
+    {
+      "folder_date": "2026-04-15",
+      "pdf_file": "2026-04-15_wednesday_folder.pdf",
+      "summary": "See events for details.",
+      "events": [
+        {
+          "title": "WEST ORANGE SCHOOLS",
+          "category": "school-event",
+          "details": "WEST ORANGE SCHOOLS ARE FACING A $14-15M BUDGET GAP Did you see that Superintendent Moore Did you see that Superintendent Moore Did you see that Superintendent Moore requested our feedback related to the budget requested our feedback related to the budget requested our feedback related to the bud...",
+          "links": [],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "PTA Matching Gifts via Benevity",
+          "date": null,
+          "date_display": "Ongoing",
+          "category": "fundraiser",
+          "details": "PTA accepts matching gifts through Benevity. PTA TIN: 51-0224833",
+          "links": []
+        },
+        {
+          "title": "PTA Membership",
+          "date": null,
+          "date_display": "2025-26 School Year",
+          "category": "membership",
+          "details": "$15 membership. Email membership@stcloudpta.org",
+          "links": [
+            {
+              "label": "Join the PTA",
+              "url": "https://stcloudpta.givebacks.com/shop"
+            }
+          ]
+        }
+      ],
+      "auto_curated": true
+    },
     {
       "folder_date": "2026-03-25",
       "pdf_file": "2026-03-25_wednesday_folder.pdf",
