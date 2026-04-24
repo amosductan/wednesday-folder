@@ -1,8 +1,53 @@
 {
   "school": "St. Cloud Elementary School",
   "mascot": "Jaguars",
-  "last_updated": "2026-04-15",
+  "last_updated": "2026-04-24",
   "weeks": [
+    {
+      "folder_date": "2026-04-22",
+      "pdf_file": "2026-04-22_wednesday_folder.pdf",
+      "summary": "JAGUAR JOG JAGUAR JOG JAGUAR JOG, Let’s Chalk.",
+      "events": [
+        {
+          "title": "JAGUAR JOG JAGUAR JOG JAGUAR JOG",
+          "category": "school-event",
+          "details": "JAGUAR JOG JAGUAR JOG JAGUAR JOG E L E M ENTARY SCHOOL ST. CLOUD COME CHEER AT THE JAGUAR JOG",
+          "links": [],
+          "date": "2026-04-24",
+          "date_display": "FRIDAY, APRIL 24"
+        },
+        {
+          "title": "TALENT",
+          "category": "school-event",
+          "details": "TALENT SUBM IS S IO N S WANTED SUBM IS S IO N S WANTE DST. CLOUD E L E",
+          "links": [],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "Let’s Chalk",
+          "category": "school-event",
+          "details": "Let’s Chalk the blacktop! Sunday May 3rd There will be sidewalk chalk available to use on the blacktop.",
+          "links": [],
+          "date": "2026-05-03",
+          "date_display": "Sunday May 3rd"
+        },
+        {
+          "title": "PTA Membership",
+          "date": null,
+          "date_display": "2025-26 School Year",
+          "category": "membership",
+          "details": "$15 membership. Email membership@stcloudpta.org",
+          "links": [
+            {
+              "label": "Join the PTA",
+              "url": "https://stcloudpta.givebacks.com/shop"
+            }
+          ]
+        }
+      ],
+      "auto_curated": true
+    },
     {
       "folder_date": "2026-04-15",
       "pdf_file": "2026-04-15_wednesday_folder.pdf",
