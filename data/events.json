@@ -1,8 +1,53 @@
 {
   "school": "St. Cloud Elementary School",
   "mascot": "Jaguars",
-  "last_updated": "2026-04-24",
+  "last_updated": "2026-05-01",
   "weeks": [
+    {
+      "folder_date": "2026-04-29",
+      "pdf_file": "2026-04-29_wednesday_folder.pdf",
+      "summary": "Let’s Chalk, The PTA executive board has several positions open for the 2022.",
+      "events": [
+        {
+          "title": "TALENT",
+          "category": "school-event",
+          "details": "TALENT SUBM IS S IO N S WANTED SUBM IS S IO N S WANTE DST. CLOUD E L E",
+          "links": [],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "Let’s Chalk",
+          "category": "school-event",
+          "details": "Let’s Chalk the blacktop! Sunday May 3rd There will be sidewalk chalk available to use on the blacktop.",
+          "links": [],
+          "date": "2026-05-03",
+          "date_display": "Sunday May 3rd"
+        },
+        {
+          "title": "Teacher & Staff",
+          "category": "school-event",
+          "details": "WEEK Teacher & Staff A p p r e c i a t i o nST. CLOUD ELEMENTARY PTA MAY 0 4 - 0 8 M o n d a y Tuesday Wednesday F r i d a y",
+          "links": [],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "The PTA executive board has several positions open for the 2022",
+          "category": "school-event",
+          "details": "The PTA executive board has several positions open for the 2022 - 2023 school year. Help enrich your child's St. Cloud experience! Scan the QR code for details. Consider joining a fantastic group of parents to help enrich your child's St. Cloud experience for the 2026-27 school year. OPEN POSITIO...",
+          "links": [
+            {
+              "label": "More Info",
+              "url": "https://bit.ly/2627pta"
+            }
+          ],
+          "date": "2026-05-31",
+          "date_display": "May 31st"
+        }
+      ],
+      "auto_curated": true
+    },
     {
       "folder_date": "2026-04-22",
       "pdf_file": "2026-04-22_wednesday_folder.pdf",
