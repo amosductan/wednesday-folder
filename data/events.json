@@ -1,8 +1,50 @@
 {
   "school": "St. Cloud Elementary School",
   "mascot": "Jaguars",
-  "last_updated": "2026-05-01",
+  "last_updated": "2026-05-15",
   "weeks": [
+    {
+      "folder_date": "2026-05-13",
+      "pdf_file": "2026-05-13_wednesday_folder.pdf",
+      "summary": "PTA General Meeting, The PTA executive board has several positions open for the 2022.",
+      "events": [
+        {
+          "title": "PTA General Meeting",
+          "category": "meeting",
+          "details": "Join us TONIGHT for our May PTA General Meeting ! Wednesday, May 13th 8:00-9:00 PM ET via Zoom Click to join Meeting ID: 825 3357 5692 Password: 993340 We look forward to seeing you there! Discussion on the calendar of events for",
+          "links": [],
+          "date": "2026-05-13",
+          "date_display": "Wednesday, May 13th"
+        },
+        {
+          "title": "TALENT",
+          "category": "school-event",
+          "details": "TALENT FREE TO ATTEND MUST REGISTER FREE TO ATTEND MUST REGISTERST. CLOUD E L E",
+          "links": [
+            {
+              "label": "More Info",
+              "url": "https://bit.ly/stcloudtalentshow26LIVE"
+            }
+          ],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "The PTA executive board has several positions open for the 2022",
+          "category": "school-event",
+          "details": "The PTA executive board has several positions open for the 2022 - 2023 school year. Help enrich your child's St. Cloud experience! Scan the QR code for details. Consider joining a fantastic group of parents to help enrich your child's St. Cloud experience for the 2026-27 school year. OPEN POSITIO...",
+          "links": [
+            {
+              "label": "More Info",
+              "url": "https://bit.ly/2627pta"
+            }
+          ],
+          "date": "2026-05-31",
+          "date_display": "May 31st"
+        }
+      ],
+      "auto_curated": true
+    },
     {
       "folder_date": "2026-04-29",
       "pdf_file": "2026-04-29_wednesday_folder.pdf",
