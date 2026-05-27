@@ -1,8 +1,29 @@
 {
   "school": "St. Cloud Elementary School",
   "mascot": "Jaguars",
-  "last_updated": "2026-05-15",
+  "last_updated": "2026-05-27",
   "weeks": [
+    {
+      "folder_date": "2026-05-20",
+      "pdf_file": "2026-05-20_wednesday_folder.pdf",
+      "summary": "June 4th.",
+      "events": [
+        {
+          "title": "June 4th",
+          "category": "school-event",
+          "details": "June 4th 9:15am-10:45am - Grades 2 & 3 11:00am-12:30pm - Grades 4 & 5 12:45pm-2:15pm - Grades K & 1 St. CloudField Day E L E",
+          "links": [
+            {
+              "label": "More Info",
+              "url": "https://bit.ly/stcloudfieldday26"
+            }
+          ],
+          "date": "2026-06-04",
+          "date_display": "June 4th"
+        }
+      ],
+      "auto_curated": true
+    },
     {
       "folder_date": "2026-05-13",
       "pdf_file": "2026-05-13_wednesday_folder.pdf",
