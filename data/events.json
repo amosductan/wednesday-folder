@@ -1,8 +1,55 @@
 {
   "school": "St. Cloud Elementary School",
   "mascot": "Jaguars",
-  "last_updated": "2026-06-03",
+  "last_updated": "2026-06-05",
   "weeks": [
+    {
+      "folder_date": "2026-06-03",
+      "pdf_file": "2026-06-03_wednesday_folder.pdf",
+      "summary": "June 4th.",
+      "events": [
+        {
+          "title": "June 4th",
+          "category": "school-event",
+          "details": "June 4th 9:15am-10:45am - Grades 2 & 3 11:00am-12:30pm - Grades 4 & 5 12:45pm-2:15pm - Grades K & 1 St. CloudField Day E L E",
+          "links": [
+            {
+              "label": "More Info",
+              "url": "https://bit.ly/stcloudfieldday26"
+            }
+          ],
+          "date": "2026-06-04",
+          "date_display": "June 4th"
+        },
+        {
+          "title": "Join The PTA Board",
+          "category": "membership",
+          "details": "Join The PTA Board: Key positions still open - We need your help! Join The PTA Board: Key positions still open - We need your help! Nervous about taking on a full role? Don’t have the time? We are flexible - get in touch!",
+          "links": [
+            {
+              "label": "More Info",
+              "url": "https://bit.ly/2627pta"
+            }
+          ],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "St. Cloud PTA Board: Join Us!",
+          "category": "school-event",
+          "details": "St. Cloud PTA Board: Join Us! St. Cloud PTA Board: Join Us! E L E M ENTARY SCHOOL ST. CLOUD Contact Us: Contact Us:",
+          "links": [
+            {
+              "label": "More Info",
+              "url": "https://bit.ly/2627ptaSCAN"
+            }
+          ],
+          "date": null,
+          "date_display": "See details"
+        }
+      ],
+      "auto_curated": true
+    },
     {
       "folder_date": "2026-05-27",
       "pdf_file": "2026-05-27_wednesday_folder.pdf",
