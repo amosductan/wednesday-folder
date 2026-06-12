@@ -1,8 +1,24 @@
 {
   "school": "St. Cloud Elementary School",
   "mascot": "Jaguars",
-  "last_updated": "2026-06-05",
+  "last_updated": "2026-06-12",
   "weeks": [
+    {
+      "folder_date": "2026-06-10",
+      "pdf_file": "2026-06-10_wednesday_folder.pdf",
+      "summary": "PTA General Meeting.",
+      "events": [
+        {
+          "title": "PTA General Meeting",
+          "category": "meeting",
+          "details": "Join us TONIGHT for our June PTA General Meeting ! Wednesday, June 10th 8:00-9:00 PM ET via Zoom Click to join Meeting ID: 882 6573 4437 Password: 949901 We look forward to seeing you there! SP ECIA LTOP ICS 2026-27 School-Year-In-",
+          "links": [],
+          "date": "2026-06-10",
+          "date_display": "Wednesday, June 10th"
+        }
+      ],
+      "auto_curated": true
+    },
     {
       "folder_date": "2026-06-03",
       "pdf_file": "2026-06-03_wednesday_folder.pdf",
