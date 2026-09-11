@@ -1,8 +1,50 @@
 {
   "school": "St. Cloud Elementary School",
   "mascot": "Jaguars",
-  "last_updated": "2026-06-12",
+  "last_updated": "2026-09-11",
   "weeks": [
+    {
+      "folder_date": "2026-09-09",
+      "pdf_file": "2026-09-09_wednesday_folder.pdf",
+      "summary": "PTA General Meeting, FREE ADMISSION!.",
+      "events": [
+        {
+          "title": "PTA General Meeting",
+          "category": "meeting",
+          "details": "SAVE THE DATE for our FIRST PTA General Meeting of the School Year! Wednesday, September 16th 8:00-9:00 PM ET via Zoom Link to follow in the Wednesday Folder and PTA newsletter (become a member to receive these newsletters). We look forward to seeing you there! Hear what’s planned for the 26/27 s...",
+          "links": [],
+          "date": "2026-09-16",
+          "date_display": "Wednesday, September 16th"
+        },
+        {
+          "title": "FREE ADMISSION!",
+          "category": "school-event",
+          "details": "FREE ADMISSION! INFLATABLES/ BOUNCE HOUSES CARNIVAL GAMES VIDEO GAMING TRUCK FACE PAINTING ARTS & CRAFTS MUSIC...AND MORE! Come celebrate the start of school with family and friends! ST. CLO UD FA LL FEST bit.ly/scfallfest26Saturday, September 19 Saturday, September 19 1pm - 4pm 1pm - 4pm Stagg F...",
+          "links": [
+            {
+              "label": "More Info",
+              "url": "https://bit.ly/scfallfest26Saturday"
+            }
+          ],
+          "date": "2026-09-19",
+          "date_display": "Saturday, September 19"
+        },
+        {
+          "title": "PTA Membership",
+          "date": null,
+          "date_display": "2025-26 School Year",
+          "category": "membership",
+          "details": "$15 membership. Email membership@stcloudpta.org",
+          "links": [
+            {
+              "label": "Join the PTA",
+              "url": "https://stcloudpta.givebacks.com/shop"
+            }
+          ]
+        }
+      ],
+      "auto_curated": true
+    },
     {
       "folder_date": "2026-06-10",
       "pdf_file": "2026-06-10_wednesday_folder.pdf",
