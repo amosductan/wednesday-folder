@@ -1,8 +1,42 @@
 {
   "school": "St. Cloud Elementary School",
   "mascot": "Jaguars",
-  "last_updated": "2026-09-18",
+  "last_updated": "2026-09-25",
   "weeks": [
+    {
+      "folder_date": "2026-09-23",
+      "pdf_file": "2026-09-23_wednesday_folder.pdf",
+      "summary": "See events for details.",
+      "events": [
+        {
+          "title": "bit.ly/budgetcouncil",
+          "category": "school-event",
+          "details": "bit.ly/budgetcouncil",
+          "links": [
+            {
+              "label": "More Info",
+              "url": "https://bit.ly/budgetcouncil"
+            }
+          ],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "PTA Membership",
+          "date": null,
+          "date_display": "2025-26 School Year",
+          "category": "membership",
+          "details": "$15 membership. Email membership@stcloudpta.org",
+          "links": [
+            {
+              "label": "Join the PTA",
+              "url": "https://stcloudpta.givebacks.com/shop"
+            }
+          ]
+        }
+      ],
+      "auto_curated": true
+    },
     {
       "folder_date": "2026-09-16",
       "pdf_file": "2026-09-16_wednesday_folder.pdf",
