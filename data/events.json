@@ -1,8 +1,68 @@
 {
   "school": "St. Cloud Elementary School",
   "mascot": "Jaguars",
-  "last_updated": "2026-10-02",
+  "last_updated": "2026-10-09",
   "weeks": [
+    {
+      "folder_date": "2026-10-07",
+      "pdf_file": "2026-10-07_wednesday_folder.pdf",
+      "summary": "PTA General Meeting.",
+      "events": [
+        {
+          "title": "PTA General Meeting",
+          "category": "meeting",
+          "details": "Join us for our PTA General Meeting Wednesday, October 14th 8:00-9:00 PM ET via Zoom Link to follow in the Wednesday Folder and PTA newsletter Join us to meet the West Orange Board of Education Candidates Submit questions via QR code or at bit.ly/woboeqs",
+          "links": [
+            {
+              "label": "More Info",
+              "url": "https://bit.ly/woboeqs"
+            }
+          ],
+          "date": "2026-10-14",
+          "date_display": "Wednesday, October 14th"
+        },
+        {
+          "title": "Trunk or Treat",
+          "category": "community-event",
+          "details": "TRUNK OR TRUNK OR TRETREAT!AT!TRUNK OR TREAT! SATURDAYST. CLOUD ELEMENTARY SCHOOL PTA PRESENTS OCT 24 OCT 24 OCT 24 1-3pmHOST A TRUNK! HOST A TRUNK! HOST A TRUNK! WE ’RE LOOKING FOR TRUNK HOSTS FOR OUR ANNUAL SPOOK-TACULAR EVENT! We ’re also collecting candy and non-candy treat",
+          "links": [
+            {
+              "label": "More Info",
+              "url": "https://bit.ly/trunkhost26"
+            }
+          ],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "bit.ly/budgetcouncil",
+          "category": "school-event",
+          "details": "bit.ly/budgetcouncil Final Week to Apply!",
+          "links": [
+            {
+              "label": "More Info",
+              "url": "https://bit.ly/budgetcouncil"
+            }
+          ],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "PTA Membership",
+          "date": null,
+          "date_display": "2025-26 School Year",
+          "category": "membership",
+          "details": "$15 membership. Email membership@stcloudpta.org",
+          "links": [
+            {
+              "label": "Join the PTA",
+              "url": "https://stcloudpta.givebacks.com/shop"
+            }
+          ]
+        }
+      ],
+      "auto_curated": true
+    },
     {
       "folder_date": "2026-09-30",
       "pdf_file": "2026-09-30_wednesday_folder.pdf",
