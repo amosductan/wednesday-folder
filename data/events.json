@@ -1,8 +1,54 @@
 {
   "school": "St. Cloud Elementary School",
   "mascot": "Jaguars",
-  "last_updated": "2026-10-09",
+  "last_updated": "2026-10-16",
   "weeks": [
+    {
+      "folder_date": "2026-10-14",
+      "pdf_file": "2026-10-14_wednesday_folder.pdf",
+      "summary": "PTA General Meeting.",
+      "events": [
+        {
+          "title": "PTA General Meeting",
+          "category": "meeting",
+          "details": "Join us TONIGHT for our PTA General Meeting Wednesday, October 14th 8:00-9:00 PM ET via Zoom Click to join meeting We look forward to seeing you there! Join us to meet the West Orange Board of Education Candidates",
+          "links": [],
+          "date": "2026-10-14",
+          "date_display": "Wednesday, October 14th"
+        },
+        {
+          "title": "Trunk or Treat",
+          "category": "community-event",
+          "details": "TRUNK OR TRUNK OR TRETREAT!AT!TRUNK OR TREAT! WE NEED 5 MORE TRUNKS! SIGN UP TO VOLUNTEER! SATURDAYST. CLOUD ELEMENTARY SCHOOL PTA PRESENTS OCT 24 OCT 24 OCT 24",
+          "links": [
+            {
+              "label": "More Info",
+              "url": "https://bit.ly/trunkhost26"
+            },
+            {
+              "label": "Sign Up / Volunteer",
+              "url": "https://bit.ly/tot26volunteerWe"
+            }
+          ],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "PTA Membership",
+          "date": null,
+          "date_display": "2025-26 School Year",
+          "category": "membership",
+          "details": "$15 membership. Email membership@stcloudpta.org",
+          "links": [
+            {
+              "label": "Join the PTA",
+              "url": "https://stcloudpta.givebacks.com/shop"
+            }
+          ]
+        }
+      ],
+      "auto_curated": true
+    },
     {
       "folder_date": "2026-10-07",
       "pdf_file": "2026-10-07_wednesday_folder.pdf",
