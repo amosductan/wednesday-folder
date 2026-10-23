@@ -1,8 +1,55 @@
 {
   "school": "St. Cloud Elementary School",
   "mascot": "Jaguars",
-  "last_updated": "2026-10-16",
+  "last_updated": "2026-10-23",
   "weeks": [
+    {
+      "folder_date": "2026-10-21",
+      "pdf_file": "2026-10-21_wednesday_folder.pdf",
+      "summary": "See events for details.",
+      "events": [
+        {
+          "title": "Trunk or Treat",
+          "category": "community-event",
+          "details": "TRUNK OR TRUNK OR TRETREAT!AT!TRUNK OR TREAT! SIGN UP TO VOLUNTEER! SATURDAYST. CLOUD ELEMENTARY SCHOOL PTA PRESENTS OCT 24 OCT 24 OCT 24 1-3pm",
+          "links": [
+            {
+              "label": "Sign Up / Volunteer",
+              "url": "https://bit.ly/tot26volunteer"
+            }
+          ],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "Election Day Bake Sale",
+          "category": "fundraiser",
+          "details": "BAKE salesale sale ELECTION DAY NOV 3TUESDAY7:00 AM - 7:00 PM ST. CLOUD ELEMENTARY SCHOOL PTA Be part of our Election Day Bake Sale! Bring baked goods or volunteer to sell treats to voters at St. Cloud Elementary on Election Day. All proceeds go to help fund 5 grade activitiesthbit.ly/scbakesale",
+          "links": [
+            {
+              "label": "More Info",
+              "url": "https://bit.ly/scbakesale"
+            }
+          ],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "PTA Membership",
+          "date": null,
+          "date_display": "2025-26 School Year",
+          "category": "membership",
+          "details": "$15 membership. Email membership@stcloudpta.org",
+          "links": [
+            {
+              "label": "Join the PTA",
+              "url": "https://stcloudpta.givebacks.com/shop"
+            }
+          ]
+        }
+      ],
+      "auto_curated": true
+    },
     {
       "folder_date": "2026-10-14",
       "pdf_file": "2026-10-14_wednesday_folder.pdf",
