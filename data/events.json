@@ -1,8 +1,74 @@
 {
   "school": "St. Cloud Elementary School",
   "mascot": "Jaguars",
-  "last_updated": "2026-10-23",
+  "last_updated": "2026-10-30",
   "weeks": [
+    {
+      "folder_date": "2026-10-28",
+      "pdf_file": "2026-10-28_wednesday_folder.pdf",
+      "summary": "PTA General Meeting.",
+      "events": [
+        {
+          "title": "Election Day Bake Sale",
+          "category": "fundraiser",
+          "details": "BAKE salesale sale ELECTION DAY NOV 3TUESDAY7:00 AM - 7:00 PM ST. CLOUD ELEMENTARY SCHOOL PTA Be part of our Election Day Bake Sale! Bring baked goods or volunteer to sell treats to voters at St. Cloud Elementary on Election Day. All proceeds go to help fund 5 grade activitiesthbit.ly/scbakesale",
+          "links": [
+            {
+              "label": "More Info",
+              "url": "https://bit.ly/scbakesale"
+            }
+          ],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "b i t . l y / w o w i z a r d s",
+          "category": "school-event",
+          "details": "b i t . l y / w o w i z a r d s",
+          "links": [],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "bit . ly / scy earbook27",
+          "category": "school-event",
+          "details": "bit . ly / scy earbook27",
+          "links": [],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "PTA General Meeting",
+          "category": "meeting",
+          "details": "Join us for our next PTA General Meeting Wednesday, November 11th 8:00-9:00 PM ET via Zoom Link to follow in the Wednesday Folder and PTA newsletter Join us for general updates and for a discussion on renovating the All Purpose Room",
+          "links": [],
+          "date": "2026-11-11",
+          "date_display": "Wednesday, November 11th"
+        },
+        {
+          "title": "Please JOIN St. Cloud on Friday, Nov. 13th at 9:30am",
+          "category": "school-event",
+          "details": "Please JOIN St. Cloud on Friday, Nov. 13th at 9:30am on Stagg Field. The entire school will march to acknowledge and celebrate Ruby Bridges. Students are ENCOURAGED to WEAR PURPLE as they walk with their class and hold signs that are made while learning about Civil Rights Icon Ruby Bridges. Wear ...",
+          "links": [],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "PTA Membership",
+          "date": null,
+          "date_display": "2025-26 School Year",
+          "category": "membership",
+          "details": "$15 membership. Email membership@stcloudpta.org",
+          "links": [
+            {
+              "label": "Join the PTA",
+              "url": "https://stcloudpta.givebacks.com/shop"
+            }
+          ]
+        }
+      ],
+      "auto_curated": true
+    },
     {
       "folder_date": "2026-10-21",
       "pdf_file": "2026-10-21_wednesday_folder.pdf",
