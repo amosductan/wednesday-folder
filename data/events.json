@@ -1,8 +1,91 @@
 {
   "school": "St. Cloud Elementary School",
   "mascot": "Jaguars",
-  "last_updated": "2026-10-30",
+  "last_updated": "2026-11-13",
   "weeks": [
+    {
+      "folder_date": "2026-11-12",
+      "pdf_file": "2026-11-12_wednesday_folder.pdf",
+      "summary": "See events for details.",
+      "events": [
+        {
+          "title": "Please JOIN St. Cloud on Friday, Nov. 13th at 9:30am",
+          "category": "school-event",
+          "details": "Please JOIN St. Cloud on Friday, Nov. 13th at 9:30am on Stagg Field. The entire school will march to acknowledge and celebrate Ruby Bridges. Students are ENCOURAGED to WEAR PURPLE as they walk with their class and hold signs that are made while learning about Civil Rights Icon Ruby Bridges. Wear ...",
+          "links": [],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "b i t . l y / w o w i z a r d s",
+          "category": "school-event",
+          "details": "b i t . l y / w o w i z a r d s",
+          "links": [],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "bit .ly/wizards26S UNDAY",
+          "category": "school-event",
+          "details": "bit .ly/wizards26S UNDAY",
+          "links": [],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "Info + links atbit.ly/WinterGiftStCDC",
+          "category": "school-event",
+          "details": "Info + links atbit.ly/WinterGiftStCDC Sponsor a student Donate new toys, gifts or books Donate grocery gift cards Venmo a donation Donations can be sent to the main office at school.THE ST. CLOUD DIVERSITY COUNCIL AND THE WEST ORANGE KIWANIS CLUB 2026 Winter Gift Drive",
+          "links": [
+            {
+              "label": "More Info",
+              "url": "https://bit.ly/WinterGiftStCDC"
+            }
+          ],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "b i t . l y / k i d s b a z a a r 2 6",
+          "category": "school-event",
+          "details": "b i t . l y / k i d s b a z a a r 2 6",
+          "links": [],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "The yearbook needs your 5th grader's photos",
+          "category": "school-event",
+          "details": "The yearbook needs your 5th grader's photos: BABY PIG, 1ST DAY OF K & SIBLINGS 1 baby pic (under 18 months) 1 pic from 1st day of kindergarten (wherever it was) 1 pic of your 5th grader with sibling(s)",
+          "links": [
+            {
+              "label": "More Info",
+              "url": "https://bit.ly/"
+            },
+            {
+              "label": "More Info",
+              "url": "https://bit.ly/scyearbook27"
+            }
+          ],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "PTA Membership",
+          "date": null,
+          "date_display": "2025-26 School Year",
+          "category": "membership",
+          "details": "$15 membership. Email membership@stcloudpta.org",
+          "links": [
+            {
+              "label": "Join the PTA",
+              "url": "https://stcloudpta.givebacks.com/shop"
+            }
+          ]
+        }
+      ],
+      "auto_curated": true
+    },
     {
       "folder_date": "2026-10-28",
       "pdf_file": "2026-10-28_wednesday_folder.pdf",
