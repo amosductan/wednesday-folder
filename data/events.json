@@ -1,8 +1,50 @@
 {
   "school": "St. Cloud Elementary School",
   "mascot": "Jaguars",
-  "last_updated": "2026-11-13",
+  "last_updated": "2026-11-20",
   "weeks": [
+    {
+      "folder_date": "2026-11-18",
+      "pdf_file": "2026-11-18_wednesday_folder.pdf",
+      "summary": "See events for details.",
+      "events": [
+        {
+          "title": "Info + links atbit.ly/WinterGiftStCDC",
+          "category": "school-event",
+          "details": "Info + links atbit.ly/WinterGiftStCDC Sponsor a student Donate new toys, gifts or books Donate grocery gift cards Venmo a donation Donations can be sent to the main office at school.THE ST. CLOUD DIVERSITY COUNCIL AND THE WEST ORANGE KIWANIS CLUB 2026 Winter Gift Drive",
+          "links": [
+            {
+              "label": "More Info",
+              "url": "https://bit.ly/WinterGiftStCDC"
+            }
+          ],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "b i t . l y / k i d s b a z a a r 2 6",
+          "category": "school-event",
+          "details": "b i t . l y / k i d s b a z a a r 2 6",
+          "links": [],
+          "date": null,
+          "date_display": "See details"
+        },
+        {
+          "title": "PTA Membership",
+          "date": null,
+          "date_display": "2025-26 School Year",
+          "category": "membership",
+          "details": "$15 membership. Email membership@stcloudpta.org",
+          "links": [
+            {
+              "label": "Join the PTA",
+              "url": "https://stcloudpta.givebacks.com/shop"
+            }
+          ]
+        }
+      ],
+      "auto_curated": true
+    },
     {
       "folder_date": "2026-11-12",
       "pdf_file": "2026-11-12_wednesday_folder.pdf",
